@@ -1,0 +1,13 @@
+[
+  {
+    "term": "Bad Term",
+    "slug": "bad-term",
+    "category": "test_category",
+    "difficulty": "beginner",
+    "definition": "This term is missing the analogy field.",
+    "use_in_a_sentence": "This should fail validation.",
+    "business_context": "Should not load.",
+    "related_terms": [],
+    "tags": ["test"]
+  }
+]

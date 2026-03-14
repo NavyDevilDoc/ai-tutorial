@@ -1,0 +1,98 @@
+[
+  {
+    "term": "ROI of AI",
+    "slug": "roi-of-ai",
+    "category": "business_strategy",
+    "difficulty": "beginner",
+    "definition": "Return on Investment for AI initiatives — the measurable business value gained (revenue increased, costs reduced, time saved) compared to the total cost of building, deploying, and maintaining an AI system.",
+    "analogy": "Like calculating whether a new piece of factory equipment pays for itself. You compare the purchase price plus operating costs against the extra production and savings it generates over time.",
+    "use_in_a_sentence": "The AI-powered fraud detection system delivered a 4x ROI in the first year by preventing $2 million in fraudulent transactions against a $500K implementation cost.",
+    "business_context": "Proving ROI is the biggest challenge for AI projects. Start with a clear business metric before building anything, and measure it throughout the project lifecycle.",
+    "related_terms": ["proof-of-concept", "total-cost-of-ownership", "ai-maturity"],
+    "tags": ["core", "measurement"]
+  },
+  {
+    "term": "Proof of Concept",
+    "slug": "proof-of-concept",
+    "category": "business_strategy",
+    "difficulty": "beginner",
+    "definition": "A small-scale, time-limited experiment designed to test whether an AI approach can actually solve a specific business problem before committing to a full implementation. Often abbreviated as POC.",
+    "analogy": "Like a test drive before buying a car. You do not commit to the purchase until you have seen it perform in real conditions and confirmed it meets your needs.",
+    "use_in_a_sentence": "We ran a 6-week proof of concept with 1,000 sample invoices to verify the OCR system could handle our document formats before approving the full rollout.",
+    "business_context": "POCs are the best way to de-risk AI investments. They should have a clear success metric, a defined timeline, and realistic data — not just a demo with cherry-picked examples.",
+    "related_terms": ["roi-of-ai", "ai-maturity", "human-in-the-loop"],
+    "tags": ["core", "process"]
+  },
+  {
+    "term": "Human-in-the-Loop",
+    "slug": "human-in-the-loop",
+    "category": "business_strategy",
+    "difficulty": "beginner",
+    "definition": "A system design where a human reviews, approves, or corrects the AI's output before it takes effect. The AI handles the heavy lifting, but a person makes the final call.",
+    "analogy": "Like autopilot on an airplane. The computer flies the plane most of the time, but the pilot monitors everything and takes over for takeoff, landing, and unexpected situations.",
+    "use_in_a_sentence": "We implemented a human-in-the-loop process where the AI drafts customer responses and a support agent reviews them before sending — combining speed with quality control.",
+    "business_context": "Human-in-the-loop is the most common deployment pattern for AI in high-stakes settings. It reduces risk while still capturing most of the efficiency gains.",
+    "related_terms": ["automation-vs-augmentation", "guardrails", "responsible-ai", "ai-agent"],
+    "tags": ["core", "deployment"]
+  },
+  {
+    "term": "Automation vs Augmentation",
+    "slug": "automation-vs-augmentation",
+    "category": "business_strategy",
+    "difficulty": "beginner",
+    "definition": "Two approaches to deploying AI. Automation replaces human tasks entirely (the AI does it all), while augmentation enhances human capabilities (the AI helps people do their jobs better and faster).",
+    "analogy": "Like the difference between a self-checkout machine (automation — replaces the cashier) and a calculator (augmentation — helps the accountant work faster but does not replace them).",
+    "use_in_a_sentence": "For legal document review, we chose augmentation over automation — the AI highlights relevant clauses and flags risks, but attorneys still make the final judgment calls.",
+    "business_context": "Most successful enterprise AI projects are augmentation, not automation. Fully automating tasks is harder, riskier, and often faces more employee resistance than enhancing existing workflows.",
+    "related_terms": ["human-in-the-loop", "ai-agent", "roi-of-ai"],
+    "tags": ["core", "strategy"]
+  },
+  {
+    "term": "AI Maturity",
+    "slug": "ai-maturity",
+    "category": "business_strategy",
+    "difficulty": "intermediate",
+    "definition": "A measure of how advanced an organization is in adopting AI — from early experimentation (running first POCs) through operationalized AI (models in production) to AI-native (AI embedded in every core process).",
+    "analogy": "Like a company's digital transformation journey. Some organizations still run on spreadsheets (low maturity), others have basic software (medium), and some have fully automated digital operations (high).",
+    "use_in_a_sentence": "Our AI maturity assessment revealed we are strong at experimentation but weak at production deployment — we build great prototypes that never make it to production.",
+    "business_context": "Understanding your AI maturity level helps set realistic expectations. Jumping to advanced use cases before building foundational capabilities (data infrastructure, MLOps) usually fails.",
+    "related_terms": ["proof-of-concept", "roi-of-ai", "total-cost-of-ownership"],
+    "tags": ["core", "assessment"]
+  },
+  {
+    "term": "Vendor Lock-in",
+    "slug": "vendor-lock-in",
+    "category": "business_strategy",
+    "difficulty": "intermediate",
+    "definition": "A situation where switching away from a specific AI vendor becomes extremely difficult or expensive because your systems, data, and workflows are deeply integrated with their proprietary technology.",
+    "analogy": "Like choosing a phone ecosystem. Once you have bought apps, accessories, and stored years of photos in one ecosystem, switching to a competitor means losing or rebuilding everything.",
+    "use_in_a_sentence": "We designed our AI architecture with swappable model endpoints to avoid vendor lock-in — if pricing changes or a better model launches, we can switch providers within days.",
+    "business_context": "Vendor lock-in is a strategic risk in AI procurement. Mitigation strategies include using open standards, maintaining model-agnostic abstractions, and negotiating data portability clauses.",
+    "related_terms": ["api", "total-cost-of-ownership", "foundation-model"],
+    "tags": ["risk", "procurement"]
+  },
+  {
+    "term": "Total Cost of Ownership",
+    "slug": "total-cost-of-ownership",
+    "category": "business_strategy",
+    "difficulty": "intermediate",
+    "definition": "The full cost of an AI system over its entire lifecycle — including development, infrastructure, data labeling, training, deployment, monitoring, maintenance, and eventual decommissioning. Often abbreviated as TCO.",
+    "analogy": "Like the true cost of owning a car. The sticker price is just the start — you also pay for insurance, gas, maintenance, repairs, and parking over its lifetime.",
+    "use_in_a_sentence": "The total cost of ownership for our in-house model was 3x higher than the API-based solution when we factored in GPU costs, engineer salaries, and ongoing maintenance.",
+    "business_context": "AI projects frequently go over budget because teams underestimate TCO. The initial build is typically only 20-30% of the total lifetime cost — monitoring, retraining, and infrastructure are the rest.",
+    "related_terms": ["roi-of-ai", "vendor-lock-in", "ai-maturity"],
+    "tags": ["core", "finance"]
+  },
+  {
+    "term": "Data Strategy",
+    "slug": "data-strategy",
+    "category": "business_strategy",
+    "difficulty": "beginner",
+    "definition": "An organization's plan for how it will collect, store, manage, and use data to support its business goals — especially AI and analytics initiatives. Without a data strategy, AI projects lack the fuel they need.",
+    "analogy": "Like a farm's irrigation plan. You can have the best seeds (algorithms) and the best soil (compute), but without a reliable water supply (data), nothing will grow.",
+    "use_in_a_sentence": "Our data strategy identified three critical gaps — customer interaction data was siloed across five systems, product data lacked consistent labeling, and we had no process for data quality checks.",
+    "business_context": "Data strategy is the single biggest predictor of AI success. Most AI projects fail not because of bad algorithms but because of bad, missing, or inaccessible data.",
+    "related_terms": ["training-data", "feature-store", "data-privacy"],
+    "tags": ["core", "planning"]
+  }
+]

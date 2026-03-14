@@ -1,0 +1,12 @@
+{
+  "term": "Supervised Learning",
+  "slug": "supervised-learning",
+  "category": "ml_fundamentals",
+  "difficulty": "beginner",
+  "definition": "A type of machine learning where a model is trained on labeled data — meaning each training example has a known correct answer.",
+  "analogy": "Like a student learning from a textbook with an answer key. The model studies examples where the right answer is already provided.",
+  "use_in_a_sentence": "Our team used supervised learning to train a model that predicts customer churn based on historical account data.",
+  "business_context": "Common in fraud detection, customer segmentation, and demand forecasting.",
+  "related_terms": ["unsupervised-learning", "training-data", "label"],
+  "tags": ["core", "model-training"]
+}

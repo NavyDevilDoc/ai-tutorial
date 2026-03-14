@@ -1,0 +1,122 @@
+[
+  {
+    "term": "Image Classification",
+    "slug": "image-classification",
+    "category": "computer_vision",
+    "difficulty": "beginner",
+    "definition": "The task of assigning a label to an entire image based on its content — for example, identifying whether a photo contains a cat or a dog.",
+    "analogy": "Like a mail sorter who looks at each envelope and tosses it into the correct bin — bills, personal letters, junk mail — based on what they see.",
+    "use_in_a_sentence": "Our quality control system uses image classification to sort products into 'pass' or 'defect' categories on the production line.",
+    "business_context": "Used in manufacturing quality control, medical imaging, insurance claims processing, and retail inventory management.",
+    "related_terms": ["object-detection", "convolutional-layer", "supervised-learning", "classification"],
+    "tags": ["core", "task-type"]
+  },
+  {
+    "term": "Object Detection",
+    "slug": "object-detection",
+    "category": "computer_vision",
+    "difficulty": "intermediate",
+    "definition": "A computer vision task that identifies and locates multiple objects within an image, drawing bounding boxes around each one and labeling what it is.",
+    "analogy": "Like a game of I-Spy where you have to find and point to every matching item in a busy scene, not just say whether the item exists somewhere in the picture.",
+    "use_in_a_sentence": "The warehouse robot uses object detection to identify and locate individual packages on a conveyor belt for automated sorting.",
+    "business_context": "Powers autonomous vehicles, security surveillance, retail shelf monitoring, and agricultural crop analysis.",
+    "related_terms": ["image-classification", "bounding-box", "convolutional-layer"],
+    "tags": ["core", "task-type"]
+  },
+  {
+    "term": "Convolutional Layer",
+    "slug": "convolutional-layer",
+    "category": "computer_vision",
+    "difficulty": "intermediate",
+    "definition": "A specialized neural network layer that scans an image with small filters to detect visual patterns like edges, textures, and shapes.",
+    "analogy": "Like running a magnifying glass across a painting in a grid pattern. At each position, you note what local pattern you see — a curve, a straight line, a color change.",
+    "use_in_a_sentence": "The early convolutional layers in our model learned to detect simple edges, while deeper layers recognized complex features like faces.",
+    "business_context": "Convolutional layers are the building blocks of image recognition systems. They are what make it possible for AI to 'see' and interpret visual information.",
+    "related_terms": ["layer", "image-classification", "pixel"],
+    "tags": ["architecture", "image-processing"]
+  },
+  {
+    "term": "Pixel",
+    "slug": "pixel",
+    "category": "computer_vision",
+    "difficulty": "beginner",
+    "definition": "The smallest unit of a digital image — a single dot of color. Images are represented as grids of pixels, and each pixel has numeric values for its color channels.",
+    "analogy": "Like a single tile in a mosaic. Up close it is just one colored square, but thousands of tiles together form a recognizable picture.",
+    "use_in_a_sentence": "Our model processes 224-by-224-pixel images, meaning each input is a grid of about 50,000 color values.",
+    "business_context": "Higher resolution images (more pixels) can improve model accuracy but also increase processing time and storage costs.",
+    "related_terms": ["convolutional-layer", "image-classification"],
+    "tags": ["core", "data-representation"]
+  },
+  {
+    "term": "Bounding Box",
+    "slug": "bounding-box",
+    "category": "computer_vision",
+    "difficulty": "beginner",
+    "definition": "A rectangle drawn around an object in an image to indicate its location. Defined by coordinates for its corners, it tells the model where an object starts and ends.",
+    "analogy": "Like drawing a rectangle around a word in a newspaper with a highlighter. The box does not describe the word itself — it just shows where to look.",
+    "use_in_a_sentence": "The security camera system draws bounding boxes around detected vehicles and pedestrians in real time for the monitoring team.",
+    "business_context": "Bounding boxes are the standard output format for object detection systems used in logistics, security, and autonomous driving.",
+    "related_terms": ["object-detection", "pixel", "image-classification"],
+    "tags": ["core", "annotation"]
+  },
+  {
+    "term": "Image Segmentation",
+    "slug": "image-segmentation",
+    "category": "computer_vision",
+    "difficulty": "intermediate",
+    "definition": "A computer vision task that classifies every single pixel in an image, creating a detailed map of exactly which pixels belong to which object or region.",
+    "analogy": "Like coloring every part of a coloring book page where each region gets a different color — sky is blue, grass is green, road is gray — with no white space left.",
+    "use_in_a_sentence": "The medical imaging system uses image segmentation to precisely outline tumor boundaries, helping radiologists measure tumor size down to the millimeter.",
+    "business_context": "Used in medical imaging, autonomous driving, satellite analysis, and any application where knowing the exact shape of objects matters, not just their location.",
+    "related_terms": ["object-detection", "pixel", "convolutional-layer"],
+    "tags": ["task-type", "advanced"]
+  },
+  {
+    "term": "OCR",
+    "slug": "ocr",
+    "category": "computer_vision",
+    "difficulty": "beginner",
+    "definition": "Optical Character Recognition — technology that converts images of text (from scanned documents, photos, or PDFs) into machine-readable text that software can search, edit, and analyze.",
+    "analogy": "Like a very fast typist who looks at a printed page and types out everything they see. The computer reads the image of text and converts it into actual editable text.",
+    "use_in_a_sentence": "We use OCR to digitize thousands of paper invoices per day, automatically extracting vendor names, amounts, and dates into our accounting system.",
+    "business_context": "OCR is one of the most mature and widely deployed AI technologies. It powers document digitization in banking, insurance, healthcare, and government.",
+    "related_terms": ["image-classification", "named-entity-recognition", "data-augmentation"],
+    "tags": ["core", "application"]
+  },
+  {
+    "term": "Face Detection",
+    "slug": "face-detection",
+    "category": "computer_vision",
+    "difficulty": "beginner",
+    "definition": "A computer vision task that locates human faces within an image or video frame. It finds where faces are but does not identify who the person is — that is face recognition, a separate task.",
+    "analogy": "Like a photographer's autofocus that locks onto faces in a crowd. It knows where the faces are but does not know whose face it is.",
+    "use_in_a_sentence": "The video conferencing app uses face detection to automatically frame the speaker and blur the background.",
+    "business_context": "Used in photography, video calls, retail analytics (counting foot traffic), and as the first step in identity verification systems. Carries significant privacy and ethical considerations.",
+    "related_terms": ["object-detection", "bounding-box", "algorithmic-bias", "data-privacy"],
+    "tags": ["task-type", "application"]
+  },
+  {
+    "term": "Data Augmentation",
+    "slug": "data-augmentation",
+    "category": "computer_vision",
+    "difficulty": "intermediate",
+    "definition": "A technique of creating new training examples by applying transformations to existing data — such as rotating, flipping, cropping, or adjusting the brightness of images.",
+    "analogy": "Like a music teacher having a student practice a piece at different speeds, in different keys, and with different dynamics. It is the same song, but each variation builds a different skill.",
+    "use_in_a_sentence": "By applying data augmentation, we tripled our effective training set size without collecting a single new image, and the model's accuracy improved by 8%.",
+    "business_context": "Data augmentation is a cost-effective way to improve model performance when collecting more real data is expensive or time-consuming.",
+    "related_terms": ["training-data", "overfitting", "transfer-learning"],
+    "tags": ["technique", "data-preparation"]
+  },
+  {
+    "term": "Transfer Learning",
+    "slug": "transfer-learning",
+    "category": "computer_vision",
+    "difficulty": "intermediate",
+    "definition": "A technique where a model trained on one task is reused as the starting point for a different but related task, rather than training a new model from scratch.",
+    "analogy": "Like a professional tennis player learning to play pickleball. They do not start from zero — their existing skills in hand-eye coordination, footwork, and racket control transfer to the new sport.",
+    "use_in_a_sentence": "Using transfer learning, we took a model pre-trained on millions of general images and adapted it to detect cracks in concrete with only 500 labeled examples.",
+    "business_context": "Transfer learning dramatically reduces the data and compute needed for custom AI projects, making it feasible for companies that do not have millions of labeled examples.",
+    "related_terms": ["fine-tuning", "training-data", "foundation-model", "deep-learning"],
+    "tags": ["technique", "efficiency"]
+  }
+]

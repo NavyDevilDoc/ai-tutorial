@@ -1,0 +1,18 @@
+[project]
+name = "ai-tutorial"
+version = "0.1.0"
+description = "AI Literacy Tutor — plain-language AI/ML glossary for non-technical professionals"
+requires-python = ">=3.12"
+dependencies = [
+    "pydantic>=2.12.5",
+    "rapidfuzz>=3.14.3",
+    "streamlit>=1.55.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]

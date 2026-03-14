@@ -1,0 +1,98 @@
+[
+  {
+    "term": "Generative AI",
+    "slug": "generative-ai",
+    "category": "generative_ai",
+    "difficulty": "beginner",
+    "definition": "A category of AI systems that create new content — text, images, code, audio, or video — rather than simply analyzing or classifying existing data.",
+    "analogy": "Like the difference between an art critic and an artist. Traditional AI is the critic (it analyzes and classifies); generative AI is the artist (it creates something new).",
+    "use_in_a_sentence": "Our marketing team uses generative AI to draft initial versions of ad copy, which a human editor then refines and approves.",
+    "business_context": "Generative AI is the fastest-adopted technology in business history. It is transforming content creation, software development, customer service, and research workflows.",
+    "related_terms": ["large-language-model", "foundation-model", "diffusion-model", "synthetic-data"],
+    "tags": ["core", "foundational"]
+  },
+  {
+    "term": "Foundation Model",
+    "slug": "foundation-model",
+    "category": "generative_ai",
+    "difficulty": "intermediate",
+    "definition": "A very large AI model trained on broad data that can be adapted to many different tasks — like GPT, Claude, or Gemini. It serves as the 'foundation' that specialized applications are built on top of.",
+    "analogy": "Like a liberal arts education. A broad foundation of knowledge that can be applied to many careers. You do not retrain from scratch for each job — you specialize based on the foundation.",
+    "use_in_a_sentence": "Rather than building our own model, we chose a foundation model from a major vendor and customized it for our industry through fine-tuning and RAG.",
+    "business_context": "Foundation models are the building blocks of modern AI strategy. The key decision is build vs buy — most companies build on top of existing foundation models rather than creating their own.",
+    "related_terms": ["large-language-model", "fine-tuning", "transfer-learning", "generative-ai"],
+    "tags": ["core", "foundational"]
+  },
+  {
+    "term": "Diffusion Model",
+    "slug": "diffusion-model",
+    "category": "generative_ai",
+    "difficulty": "intermediate",
+    "definition": "A type of generative AI that creates images (or other media) by starting with random noise and gradually refining it into a coherent output, guided by a text description or other input.",
+    "analogy": "Like a sculptor starting with a rough block of marble and gradually chipping away to reveal a detailed statue. The model starts with noise and progressively shapes it into a clear image.",
+    "use_in_a_sentence": "The design team uses a diffusion model to generate concept art from text descriptions, producing dozens of options in minutes instead of days.",
+    "business_context": "Diffusion models power tools like DALL-E, Midjourney, and Stable Diffusion. They are transforming graphic design, advertising, and product visualization.",
+    "related_terms": ["generative-ai", "foundation-model", "synthetic-data"],
+    "tags": ["core", "image-generation"]
+  },
+  {
+    "term": "RLHF",
+    "slug": "rlhf",
+    "category": "generative_ai",
+    "difficulty": "advanced",
+    "definition": "Reinforcement Learning from Human Feedback — a training technique where human raters judge the quality of a model's outputs, and those judgments are used to make the model's responses more helpful, harmless, and honest.",
+    "analogy": "Like a new employee learning from performance reviews. Managers (human raters) evaluate the employee's work, and the employee adjusts their approach based on what gets praised versus what gets corrected.",
+    "use_in_a_sentence": "The vendor explained that their model went through RLHF to reduce harmful outputs, which is why it refuses certain types of requests.",
+    "business_context": "RLHF is a key reason modern AI assistants feel more helpful and safe than earlier models. It is expensive (requires human raters) but critical for commercial AI products.",
+    "related_terms": ["reinforcement-learning", "foundation-model", "guardrails", "responsible-ai"],
+    "tags": ["model-training", "safety"]
+  },
+  {
+    "term": "Multimodal",
+    "slug": "multimodal",
+    "category": "generative_ai",
+    "difficulty": "intermediate",
+    "definition": "An AI model that can understand and generate multiple types of content — such as text, images, audio, and video — within a single system, rather than being limited to just one type.",
+    "analogy": "Like a multilingual person who can read, write, and speak in several languages. A multimodal model is 'fluent' in text, images, and sometimes audio or video simultaneously.",
+    "use_in_a_sentence": "We chose a multimodal model so our customer support bot can understand both text messages and uploaded photos of damaged products in the same conversation.",
+    "business_context": "Multimodal capabilities are becoming standard in leading AI models. They open up use cases like visual question answering, document understanding, and video analysis.",
+    "related_terms": ["foundation-model", "large-language-model", "generative-ai"],
+    "tags": ["core", "capability"]
+  },
+  {
+    "term": "AI Agent",
+    "slug": "ai-agent",
+    "category": "generative_ai",
+    "difficulty": "intermediate",
+    "definition": "An AI system that can independently plan and execute multi-step tasks by using tools, making decisions, and taking actions — going beyond just answering questions to actually doing work.",
+    "analogy": "Like the difference between asking someone for directions versus hiring a driver. A chatbot gives you directions; an AI agent drives you there, handling navigation, traffic, and detours on its own.",
+    "use_in_a_sentence": "We deployed an AI agent that handles the entire refund process — it looks up the order, checks the policy, processes the return, and emails the customer, all without human intervention.",
+    "business_context": "AI agents represent the next wave of automation beyond chatbots. They can handle complex workflows but require careful guardrails to prevent costly mistakes.",
+    "related_terms": ["large-language-model", "guardrails", "human-in-the-loop", "automation-vs-augmentation"],
+    "tags": ["core", "application"]
+  },
+  {
+    "term": "Synthetic Data",
+    "slug": "synthetic-data",
+    "category": "generative_ai",
+    "difficulty": "intermediate",
+    "definition": "Artificially generated data that mimics the statistical properties of real data. Used when real data is scarce, expensive to collect, or contains privacy-sensitive information.",
+    "analogy": "Like flight simulator hours for pilots. The scenarios are not real flights, but they are realistic enough to build genuine skills. Synthetic data trains models without exposing real information.",
+    "use_in_a_sentence": "Because healthcare regulations limited our access to real patient data, we used synthetic data to train and validate the model before testing on actual records.",
+    "business_context": "Synthetic data solves two major problems: data scarcity and data privacy. It is increasingly used in healthcare, finance, and any domain with strict data regulations.",
+    "related_terms": ["training-data", "data-privacy", "generative-ai", "data-augmentation"],
+    "tags": ["core", "data"]
+  },
+  {
+    "term": "Guardrails",
+    "slug": "guardrails",
+    "category": "generative_ai",
+    "difficulty": "beginner",
+    "definition": "Rules, filters, and safety mechanisms built around an AI system to prevent it from producing harmful, inappropriate, or off-topic outputs. They define what the AI should and should not do.",
+    "analogy": "Like the bumper rails in a bowling alley lane for kids. The ball (AI output) can still roll freely, but the rails prevent it from going into the gutter (producing harmful or irrelevant content).",
+    "use_in_a_sentence": "We implemented guardrails that prevent our customer-facing chatbot from discussing competitors, making promises about pricing, or sharing internal company information.",
+    "business_context": "Guardrails are essential for any customer-facing AI deployment. Without them, models can generate responses that create legal liability, brand damage, or customer harm.",
+    "related_terms": ["hallucination", "responsible-ai", "ai-agent", "large-language-model"],
+    "tags": ["core", "safety"]
+  }
+]
