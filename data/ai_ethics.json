@@ -8,8 +8,16 @@
     "analogy": "Like a hiring manager who unconsciously favors candidates from their own alma mater. The manager is not deliberately unfair, but the bias in their experience leads to skewed decisions.",
     "use_in_a_sentence": "An audit revealed algorithmic bias in our loan approval model — it was approving applicants from certain zip codes at significantly lower rates, regardless of their creditworthiness.",
     "business_context": "Algorithmic bias creates legal risk, reputational damage, and real harm to people. Regulators are increasingly requiring bias audits, especially in hiring, lending, and insurance.",
-    "related_terms": ["fairness", "responsible-ai", "explainability", "training-data"],
-    "tags": ["core", "risk"]
+    "related_terms": [
+      "fairness",
+      "responsible-ai",
+      "explainability",
+      "training-data"
+    ],
+    "tags": [
+      "core",
+      "risk"
+    ]
   },
   {
     "term": "Explainability",
@@ -20,8 +28,16 @@
     "analogy": "Like a doctor who not only gives you a diagnosis but explains their reasoning — 'Your blood pressure is high and your cholesterol is elevated, which together indicate cardiac risk.'",
     "use_in_a_sentence": "Regulators require explainability for our credit scoring model, so we must be able to tell each applicant specifically why they were approved or denied.",
     "business_context": "Explainability is legally required in regulated industries like finance and healthcare. Even where not mandated, it builds trust with customers and helps teams debug model errors.",
-    "related_terms": ["black-box", "transparency", "responsible-ai", "algorithmic-bias"],
-    "tags": ["core", "governance"]
+    "related_terms": [
+      "black-box",
+      "transparency",
+      "responsible-ai",
+      "algorithmic-bias"
+    ],
+    "tags": [
+      "core",
+      "governance"
+    ]
   },
   {
     "term": "Fairness",
@@ -32,8 +48,15 @@
     "analogy": "Like a referee in a sports game. A fair referee applies the same rules consistently to both teams, regardless of personal preferences or the crowd's reaction.",
     "use_in_a_sentence": "Our fairness review found that the resume screening model scored male and female candidates equally for identical qualifications, which gave us confidence to proceed with deployment.",
     "business_context": "Fairness in AI is both a moral imperative and a business requirement. Companies face lawsuits, fines, and brand damage when AI systems are shown to discriminate.",
-    "related_terms": ["algorithmic-bias", "responsible-ai", "transparency"],
-    "tags": ["core", "principles"]
+    "related_terms": [
+      "algorithmic-bias",
+      "responsible-ai",
+      "transparency"
+    ],
+    "tags": [
+      "core",
+      "principles"
+    ]
   },
   {
     "term": "Responsible AI",
@@ -44,8 +67,17 @@
     "analogy": "Like food safety regulations for restaurants. You can serve creative, delicious food (build powerful AI), but you must follow health codes (ethical guidelines) to protect the public.",
     "use_in_a_sentence": "Our responsible AI framework requires every model to pass bias testing, security review, and privacy assessment before it can be deployed to production.",
     "business_context": "Responsible AI is moving from a nice-to-have to a board-level priority. The EU AI Act and similar regulations worldwide are making many of these practices legally mandatory.",
-    "related_terms": ["algorithmic-bias", "fairness", "explainability", "transparency", "data-privacy"],
-    "tags": ["core", "governance"]
+    "related_terms": [
+      "algorithmic-bias",
+      "fairness",
+      "explainability",
+      "transparency",
+      "data-privacy"
+    ],
+    "tags": [
+      "core",
+      "governance"
+    ]
   },
   {
     "term": "Black Box",
@@ -56,8 +88,15 @@
     "analogy": "Like a vending machine where you insert money and a random snack comes out. You got a result, but you have no idea how the machine chose that particular snack.",
     "use_in_a_sentence": "The legal team rejected the black box model for loan decisions because we could not explain to applicants why they were denied, which is required by law.",
     "business_context": "Black box models often perform better than simpler alternatives, but their lack of explainability can be a dealbreaker in regulated industries or high-stakes decisions.",
-    "related_terms": ["explainability", "transparency", "deep-learning"],
-    "tags": ["core", "risk"]
+    "related_terms": [
+      "explainability",
+      "transparency",
+      "deep-learning"
+    ],
+    "tags": [
+      "core",
+      "risk"
+    ]
   },
   {
     "term": "Transparency",
@@ -68,8 +107,15 @@
     "analogy": "Like a nutrition label on food packaging. Consumers have the right to know what is inside the product, and transparency empowers them to make informed choices.",
     "use_in_a_sentence": "Our transparency policy requires that every customer interaction with our AI chatbot begins with a disclosure that they are speaking with an automated system.",
     "business_context": "Transparency builds customer trust and is increasingly required by regulation. Companies that are upfront about AI usage tend to face less backlash when issues arise.",
-    "related_terms": ["explainability", "responsible-ai", "fairness"],
-    "tags": ["core", "principles"]
+    "related_terms": [
+      "explainability",
+      "responsible-ai",
+      "fairness"
+    ],
+    "tags": [
+      "core",
+      "principles"
+    ]
   },
   {
     "term": "Data Privacy",
@@ -80,8 +126,16 @@
     "analogy": "Like the confidentiality agreement with your doctor. You share personal information for a specific purpose (getting treated), and you expect it will not be used or shared for anything else without your permission.",
     "use_in_a_sentence": "Our data privacy review confirmed that no personally identifiable customer information was included in the model's training data, which keeps us compliant with GDPR.",
     "business_context": "Data privacy regulations like GDPR, CCPA, and HIPAA directly affect what data can be used for AI training. Violations carry massive fines — GDPR penalties can reach 4% of global revenue.",
-    "related_terms": ["consent", "responsible-ai", "synthetic-data", "training-data"],
-    "tags": ["core", "compliance"]
+    "related_terms": [
+      "consent",
+      "responsible-ai",
+      "synthetic-data",
+      "training-data"
+    ],
+    "tags": [
+      "core",
+      "compliance"
+    ]
   },
   {
     "term": "Consent",
@@ -92,7 +146,37 @@
     "analogy": "Like signing a waiver before a medical procedure. The patient must understand what will happen and explicitly agree to it before the doctor proceeds.",
     "use_in_a_sentence": "Before using customer feedback data to train our AI model, we updated our terms of service and obtained explicit consent from users through an opt-in checkbox.",
     "business_context": "Consent is a cornerstone of data privacy law. Using data without proper consent can result in legal action, regulatory fines, and lasting damage to customer trust.",
-    "related_terms": ["data-privacy", "responsible-ai", "transparency"],
-    "tags": ["core", "compliance"]
+    "related_terms": [
+      "data-privacy",
+      "responsible-ai",
+      "transparency"
+    ],
+    "tags": [
+      "core",
+      "compliance"
+    ]
+  },
+  {
+    "term": "Explainable AI",
+    "slug": "explainable-ai",
+    "category": "ai_ethics",
+    "difficulty": "intermediate",
+    "definition": "A set of methods and practices that make it possible for humans to understand how and why an AI system reaches its conclusions. Rather than simply accepting a model's output, Explainable AI (XAI) gives people insight into the reasoning behind each decision.",
+    "analogy": "Like a GPS that not only tells you to turn left but shows you the full route, explains that it avoided the highway due to traffic, and highlights the estimated time savings — so you can decide whether you agree with its logic.",
+    "use_in_a_sentence": "After our insurer adopted Explainable AI for claims processing, adjusters could see exactly which factors — repair history, location, claim frequency — drove each payout recommendation, making it far easier to spot errors and defend decisions to customers.",
+    "business_context": "Explainable AI reduces regulatory and legal exposure by enabling companies to justify automated decisions to auditors, customers, and courts. It also accelerates internal trust in AI tools, since employees are far more likely to act on a recommendation they can verify and understand.",
+    "related_terms": [
+      "explainability",
+      "black-box",
+      "algorithmic-bias",
+      "responsible-ai",
+      "transparency"
+    ],
+    "tags": [
+      "core",
+      "governance",
+      "xai",
+      "risk"
+    ]
   }
 ]
