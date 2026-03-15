@@ -24,7 +24,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: pip install pydantic anthropic rapidfuzz
+        run: pip install pydantic anthropic rapidfuzz streamlit
 
       - name: Process approved term
         env:
