@@ -8,8 +8,15 @@
     "analogy": "Like a single worker on an assembly line who takes in parts, does one specific task, and passes the result to the next station.",
     "use_in_a_sentence": "Each neuron in the network learned to detect a different pattern in the customer feedback data.",
     "business_context": "Individual neurons are rarely discussed in business settings, but understanding them helps demystify how neural networks function.",
-    "related_terms": ["layer", "weight", "activation-function"],
-    "tags": ["core", "architecture"]
+    "related_terms": [
+      "layer",
+      "weight",
+      "activation-function"
+    ],
+    "tags": [
+      "core",
+      "architecture"
+    ]
   },
   {
     "term": "Layer",
@@ -20,8 +27,16 @@
     "analogy": "Like floors in a factory building. Raw materials enter the ground floor, each floor refines the product further, and the finished item comes out the top.",
     "use_in_a_sentence": "Our image recognition model uses 12 layers, with early layers detecting edges and later layers recognizing complete objects.",
     "business_context": "Deeper networks (more layers) can learn more complex patterns but require more data and computing power to train.",
-    "related_terms": ["neuron", "weight", "backpropagation", "convolutional-layer"],
-    "tags": ["core", "architecture"]
+    "related_terms": [
+      "neuron",
+      "weight",
+      "backpropagation",
+      "convolutional-layer"
+    ],
+    "tags": [
+      "core",
+      "architecture"
+    ]
   },
   {
     "term": "Weight",
@@ -32,8 +47,16 @@
     "analogy": "Like the volume knobs on a mixing board. Each knob controls how loud one instrument is in the final mix. Training adjusts all the knobs until the music sounds right.",
     "use_in_a_sentence": "After training, the model's weights revealed that recent purchase history was the strongest signal for predicting repeat buyers.",
     "business_context": "When people say a model has 'billions of parameters,' they are mostly referring to weights. More parameters generally means more capability but also more cost.",
-    "related_terms": ["neuron", "bias", "backpropagation", "parameter"],
-    "tags": ["core", "model-training"]
+    "related_terms": [
+      "neuron",
+      "bias",
+      "backpropagation",
+      "parameter"
+    ],
+    "tags": [
+      "core",
+      "model-training"
+    ]
   },
   {
     "term": "Bias",
@@ -44,8 +67,16 @@
     "analogy": "Like the starting position of a thermostat. Even before reading the temperature, the thermostat has a baseline setting that shifts its response up or down.",
     "use_in_a_sentence": "The bias terms in our model helped it account for the baseline conversion rate before considering any customer-specific features.",
     "business_context": "Not to be confused with algorithmic bias (unfairness). In neural network architecture, bias is a technical term for a tunable offset value.",
-    "related_terms": ["weight", "neuron", "activation-function", "algorithmic-bias"],
-    "tags": ["core", "architecture"]
+    "related_terms": [
+      "weight",
+      "neuron",
+      "activation-function",
+      "algorithmic-bias"
+    ],
+    "tags": [
+      "core",
+      "architecture"
+    ]
   },
   {
     "term": "Activation Function",
@@ -56,8 +87,15 @@
     "analogy": "Like a gatekeeper who decides whether a signal is strong enough to pass through. Weak signals get dampened while strong ones are amplified.",
     "use_in_a_sentence": "Switching from a sigmoid to a ReLU activation function cut our model's training time in half without sacrificing accuracy.",
     "business_context": "Activation functions are a technical detail usually handled by engineers, but they can significantly affect training speed and model performance.",
-    "related_terms": ["neuron", "layer", "backpropagation"],
-    "tags": ["architecture", "model-training"]
+    "related_terms": [
+      "neuron",
+      "layer",
+      "backpropagation"
+    ],
+    "tags": [
+      "architecture",
+      "model-training"
+    ]
   },
   {
     "term": "Backpropagation",
@@ -68,8 +106,17 @@
     "analogy": "Like a sports coach reviewing game film. After a loss, the coach traces back through each play to figure out which decisions led to mistakes, then adjusts the game plan.",
     "use_in_a_sentence": "Through backpropagation over thousands of training cycles, the model gradually improved its accuracy from 60% to 94%.",
     "business_context": "Backpropagation is why training large models requires significant computing resources — it involves many repeated calculations across all the data.",
-    "related_terms": ["weight", "layer", "activation-function", "training-data", "loss-function"],
-    "tags": ["core", "model-training"]
+    "related_terms": [
+      "weight",
+      "layer",
+      "activation-function",
+      "training-data",
+      "loss-function"
+    ],
+    "tags": [
+      "core",
+      "model-training"
+    ]
   },
   {
     "term": "Deep Learning",
@@ -80,8 +127,16 @@
     "analogy": "Like a team of analysts where each person specializes in one piece of the puzzle. The first analyst spots basic patterns, the next finds relationships between them, and so on until the final analyst delivers sophisticated insights.",
     "use_in_a_sentence": "We moved from traditional machine learning to deep learning for our image inspection system and saw defect detection accuracy jump from 82% to 96%.",
     "business_context": "Deep learning is behind most headline-grabbing AI — voice assistants, self-driving cars, ChatGPT. It requires more data and compute than traditional ML but handles unstructured data far better.",
-    "related_terms": ["neural-network", "layer", "gpu", "foundation-model"],
-    "tags": ["core", "foundational"]
+    "related_terms": [
+      "neural-network",
+      "layer",
+      "gpu",
+      "foundation-model"
+    ],
+    "tags": [
+      "core",
+      "foundational"
+    ]
   },
   {
     "term": "Neural Network",
@@ -92,8 +147,16 @@
     "analogy": "Like a telephone network where calls are routed through many connected switches. Over time, the most useful routes get strengthened and the rarely used ones fade.",
     "use_in_a_sentence": "The neural network we trained on five years of claims data can now flag potentially fraudulent insurance claims in under a second.",
     "business_context": "Neural networks are the engine behind most modern AI applications. When someone says 'AI model,' they are very often talking about a neural network.",
-    "related_terms": ["neuron", "layer", "deep-learning", "weight"],
-    "tags": ["core", "foundational"]
+    "related_terms": [
+      "neuron",
+      "layer",
+      "deep-learning",
+      "weight"
+    ],
+    "tags": [
+      "core",
+      "foundational"
+    ]
   },
   {
     "term": "GPU",
@@ -104,8 +167,15 @@
     "analogy": "Like having 1,000 calculators working in parallel versus one really fast calculator. A GPU is slower at any single task than a CPU, but it can do thousands of tasks at the same time.",
     "use_in_a_sentence": "Upgrading from CPU-only servers to GPU instances cut our model training time from three days to four hours.",
     "business_context": "GPU availability and cost are major factors in AI project budgets. Cloud GPU rentals from AWS, Google, and Azure are how most companies access this hardware.",
-    "related_terms": ["deep-learning", "parameter", "training-data"],
-    "tags": ["infrastructure", "hardware"]
+    "related_terms": [
+      "deep-learning",
+      "parameter",
+      "training-data"
+    ],
+    "tags": [
+      "infrastructure",
+      "hardware"
+    ]
   },
   {
     "term": "Parameter",
@@ -116,8 +186,16 @@
     "analogy": "Like the adjustable settings on a professional camera — ISO, aperture, shutter speed. Each setting (parameter) can be tweaked, and together they determine the quality of the photo.",
     "use_in_a_sentence": "The vendor's new language model has 70 billion parameters, which is why it requires enterprise-grade infrastructure to run.",
     "business_context": "Parameter count is often used as a shorthand for model capability — but bigger is not always better. A smaller model that fits your use case can be faster and cheaper.",
-    "related_terms": ["weight", "bias", "deep-learning", "foundation-model"],
-    "tags": ["core", "model-size"]
+    "related_terms": [
+      "weight",
+      "bias",
+      "deep-learning",
+      "foundation-model"
+    ],
+    "tags": [
+      "core",
+      "model-size"
+    ]
   },
   {
     "term": "Loss Function",
@@ -128,8 +206,16 @@
     "analogy": "Like a golf score — the lower the number, the better you played. The loss function tells the model how far from the hole each shot landed so it can adjust its swing.",
     "use_in_a_sentence": "We watched the loss function decrease steadily during training, which confirmed the model was learning meaningful patterns from the data.",
     "business_context": "You will rarely need to choose a loss function yourself, but hearing 'the loss is decreasing' in a progress update is a good sign that training is going well.",
-    "related_terms": ["backpropagation", "weight", "epoch", "accuracy"],
-    "tags": ["model-training", "evaluation"]
+    "related_terms": [
+      "backpropagation",
+      "weight",
+      "epoch",
+      "accuracy"
+    ],
+    "tags": [
+      "model-training",
+      "evaluation"
+    ]
   },
   {
     "term": "Convolutional Neural Network",
@@ -140,8 +226,17 @@
     "analogy": "Like a detective examining a crime scene photo with a magnifying glass, systematically scanning small areas for clues. Early scans spot basic details (scratches, colors), and later analysis combines those details into meaningful evidence (a fingerprint, a face).",
     "use_in_a_sentence": "Our CNN-based quality inspection system photographs every product on the assembly line and flags defects that human inspectors miss during night shifts.",
     "business_context": "CNNs power image recognition in manufacturing QA, medical imaging, autonomous vehicles, and retail visual search. When someone says 'the AI can see,' a CNN is usually behind it.",
-    "related_terms": ["convolutional-layer", "image-classification", "deep-learning", "object-detection"],
-    "tags": ["architecture", "vision", "CNN"]
+    "related_terms": [
+      "convolutional-layer",
+      "image-classification",
+      "deep-learning",
+      "object-detection"
+    ],
+    "tags": [
+      "architecture",
+      "vision",
+      "CNN"
+    ]
   },
   {
     "term": "Recurrent Neural Network",
@@ -152,8 +247,17 @@
     "analogy": "Like reading a sentence word by word while remembering what came before. When you reach 'it' in a sentence, you know from context whether 'it' refers to the dog, the car, or the project — because you remember the earlier words.",
     "use_in_a_sentence": "We used a recurrent neural network to forecast weekly sales, since it could capture seasonal patterns and trends that simpler models missed.",
     "business_context": "RNNs were the go-to architecture for text and time series before transformers took over. They still appear in real-time applications like speech recognition and sensor data analysis where processing happens step by step.",
-    "related_terms": ["lstm", "transformer", "deep-learning", "neural-network"],
-    "tags": ["architecture", "sequence", "RNN"]
+    "related_terms": [
+      "lstm",
+      "transformer",
+      "deep-learning",
+      "neural-network"
+    ],
+    "tags": [
+      "architecture",
+      "sequence",
+      "RNN"
+    ]
   },
   {
     "term": "LSTM",
@@ -164,8 +268,17 @@
     "analogy": "Like a note-taker in a long meeting who decides which points are worth writing down, which old notes to cross out, and which to highlight for the summary. Regular memory fades, but the notes preserve what matters.",
     "use_in_a_sentence": "The LSTM model detected equipment failure patterns in sensor data by remembering subtle vibration changes from hours earlier that a standard RNN would have forgotten.",
     "business_context": "LSTMs excel at time series forecasting, anomaly detection in sensor data, and any problem where long-range patterns matter. They are more expensive to train than simple models but capture dependencies that simpler models cannot.",
-    "related_terms": ["recurrent-neural-network", "transformer", "deep-learning", "neural-network"],
-    "tags": ["architecture", "sequence", "time-series"]
+    "related_terms": [
+      "recurrent-neural-network",
+      "transformer",
+      "deep-learning",
+      "neural-network"
+    ],
+    "tags": [
+      "architecture",
+      "sequence",
+      "time-series"
+    ]
   },
   {
     "term": "Generative Adversarial Network",
@@ -176,8 +289,17 @@
     "analogy": "Like a counterfeiter and a detective in an arms race. The counterfeiter keeps improving their fake bills, the detective keeps getting better at spotting them, and eventually the fakes become nearly indistinguishable from real currency.",
     "use_in_a_sentence": "The design team used a GAN to generate photorealistic product images for A/B testing new packaging concepts before investing in physical prototypes.",
     "business_context": "GANs are used for synthetic image generation, data augmentation, video game asset creation, and drug discovery. They have been largely overtaken by diffusion models for image generation but remain important in specialized applications.",
-    "related_terms": ["deep-learning", "generative-ai", "diffusion-model", "synthetic-data"],
-    "tags": ["architecture", "generative", "GAN"]
+    "related_terms": [
+      "deep-learning",
+      "generative-ai",
+      "diffusion-model",
+      "synthetic-data"
+    ],
+    "tags": [
+      "architecture",
+      "generative",
+      "GAN"
+    ]
   },
   {
     "term": "Autoencoder",
@@ -188,7 +310,37 @@
     "analogy": "Like summarizing a 300-page book into a 5-page executive summary, then trying to recreate the full book from just the summary. The summary captures the essential plot, themes, and characters — but some minor details are lost.",
     "use_in_a_sentence": "We trained an autoencoder on normal transaction data, and now any transaction it cannot reconstruct well gets flagged as a potential anomaly for the fraud team to review.",
     "business_context": "Autoencoders are commonly used for anomaly detection (anything the model cannot reconstruct well is unusual), data compression, and denoising. They are a practical unsupervised learning tool in fraud detection and quality control.",
-    "related_terms": ["deep-learning", "unsupervised-learning", "neural-network", "embedding"],
-    "tags": ["architecture", "unsupervised", "anomaly-detection"]
+    "related_terms": [
+      "deep-learning",
+      "unsupervised-learning",
+      "neural-network",
+      "embedding"
+    ],
+    "tags": [
+      "architecture",
+      "unsupervised",
+      "anomaly-detection"
+    ]
+  },
+  {
+    "term": "Attention",
+    "slug": "attention",
+    "category": "neural_networks",
+    "difficulty": "intermediate",
+    "definition": "A mechanism that allows a neural network to focus on the most relevant parts of an input when producing an output, rather than treating all information equally. For example, when translating a sentence, it identifies which words matter most for each word it generates.",
+    "analogy": "Like a skilled editor reading a long report who, before rewriting any sentence, quickly scans the whole document to find the handful of paragraphs most relevant to that sentence — rather than weighing every paragraph the same.",
+    "use_in_a_sentence": "Thanks to the attention mechanism, our contract review tool correctly linked a liability clause on page 40 back to a definition buried in the preamble, flagging a potential risk the legal team had missed.",
+    "business_context": "Attention is the core innovation behind large language models like GPT, meaning it directly enables the powerful document summarization, chatbot, and search tools many businesses are adopting today. Understanding it helps leaders set realistic expectations about what these tools do well — handling long, complex documents — and where they still struggle.",
+    "related_terms": [
+      "transformer",
+      "large-language-model",
+      "embedding"
+    ],
+    "tags": [
+      "core",
+      "architecture",
+      "nlp",
+      "transformers"
+    ]
   }
 ]

@@ -496,5 +496,134 @@
       "infrastructure",
       "cost"
     ]
+  },
+  {
+    "term": "Hyperparameter",
+    "slug": "hyperparameter",
+    "category": "ml_fundamentals",
+    "difficulty": "intermediate",
+    "definition": "Settings that data scientists configure before training a model — controls that shape how the model learns, rather than what it learns from the data itself. Unlike the patterns a model discovers on its own, hyperparameters are manually chosen and directly influence how accurate and reliable the final model becomes.",
+    "analogy": "Like adjusting the settings on an oven before you bake. The temperature, rack position, and cook time are all choices you make upfront — and getting them wrong means your dish comes out burnt or undercooked, no matter how good the ingredients are.",
+    "use_in_a_sentence": "The data science team spent two weeks tuning hyperparameters on the credit risk model before finding a configuration that reduced false approvals by 18%.",
+    "business_context": "Poor hyperparameter choices can result in a model that is too rigid or too erratic to be useful, directly affecting forecast accuracy, risk exposure, or customer experience. Understanding that this tuning process takes time and expertise helps business stakeholders set realistic project timelines and budgets.",
+    "related_terms": [
+      "model",
+      "training-data",
+      "overfitting"
+    ],
+    "tags": [
+      "model-training",
+      "optimization",
+      "tuning",
+      "intermediate"
+    ]
+  },
+  {
+    "term": "Clustering",
+    "slug": "clustering",
+    "category": "ml_fundamentals",
+    "difficulty": "beginner",
+    "definition": "A machine learning technique that automatically groups data points together based on how similar they are to each other. The model finds these natural groupings on its own, without being told in advance what the groups should be.",
+    "analogy": "Like walking into a party and noticing that people have naturally gathered into separate conversations — sports fans in one corner, colleagues in another, neighbors by the door. No one organized it; the groups formed because of what people had in common.",
+    "use_in_a_sentence": "The marketing team used clustering to divide their customer base into five distinct groups by purchase behavior, allowing them to tailor promotions to each segment.",
+    "business_context": "Clustering helps businesses discover hidden structure in their data, enabling more targeted marketing, personalized experiences, and sharper operational decisions without requiring prior knowledge of what patterns exist.",
+    "related_terms": [
+      "unsupervised-learning",
+      "feature"
+    ],
+    "tags": [
+      "core",
+      "segmentation",
+      "unsupervised",
+      "model-training"
+    ]
+  },
+  {
+    "term": "Benchmark",
+    "slug": "benchmark",
+    "category": "ml_fundamentals",
+    "difficulty": "beginner",
+    "definition": "A standard test or reference point used to measure how well an AI model is performing. By comparing a model's results against a benchmark, teams can objectively judge whether the model is good enough to use — and whether new versions are actually improving.",
+    "analogy": "Like a standardized driving test. Every candidate is evaluated on the same course under the same conditions, so you can fairly compare one driver to another and decide who is ready for the road.",
+    "use_in_a_sentence": "Before deploying the new fraud detection model, the team ran it against an industry benchmark to confirm it outperformed their existing system by a meaningful margin.",
+    "business_context": "Benchmarks give decision-makers an objective basis for approving or rejecting an AI model, removing guesswork from the question of whether the technology is ready for production. They also make it easier to compare vendor solutions on equal footing.",
+    "related_terms": [
+      "model",
+      "accuracy",
+      "overfitting",
+      "training-data"
+    ],
+    "tags": [
+      "evaluation",
+      "model-performance",
+      "core",
+      "testing"
+    ]
+  },
+  {
+    "term": "Ground Truth",
+    "slug": "ground-truth",
+    "category": "ml_fundamentals",
+    "difficulty": "intermediate",
+    "definition": "The verified, real-world correct answer used to train or evaluate a machine learning model. It represents what actually happened, as opposed to what a model predicted. Models are measured by how closely their outputs match the ground truth.",
+    "analogy": "Like a teacher's official answer key when grading a test. No matter how confident a student is in their answer, it's only correct if it matches what's on that key.",
+    "use_in_a_sentence": "To evaluate our demand forecasting model, we compared its predictions against last year's actual sales figures, which served as the ground truth.",
+    "business_context": "The quality of your ground truth directly determines the reliability of your AI system — if the reference data is incomplete or biased, the model learns the wrong lessons. Investing in accurate, well-labeled ground truth data is one of the highest-leverage decisions a business can make before building any AI solution.",
+    "related_terms": [
+      "supervised-learning",
+      "label",
+      "training-data",
+      "overfitting"
+    ],
+    "tags": [
+      "data-quality",
+      "model-evaluation",
+      "labeling",
+      "gt"
+    ]
+  },
+  {
+    "term": "Feature Engineering",
+    "slug": "feature-engineering",
+    "category": "ml_fundamentals",
+    "difficulty": "intermediate",
+    "definition": "The process of selecting, transforming, or creating the right input variables — called features — that a machine learning model uses to make predictions. Raw data rarely comes in the perfect form for a model to learn from, so experts reshape and refine it to highlight the patterns that matter most.",
+    "analogy": "Like a chef doing prep work before cooking. The raw ingredients (data) don't go straight into the dish — they're chopped, marinated, and measured in specific ways so the final result turns out right. How you prepare the ingredients matters as much as the recipe itself.",
+    "use_in_a_sentence": "Our data team improved loan default predictions significantly by combining raw transaction data into engineered features like 'average monthly spending volatility' and 'days since last missed payment.'",
+    "business_context": "The quality of features fed into a model often determines its accuracy more than the choice of model itself, meaning poor feature engineering can quietly undermine even expensive AI investments. Business teams can add real value here by contributing domain knowledge about which factors are likely to matter.",
+    "related_terms": [
+      "feature",
+      "supervised-learning",
+      "training-data",
+      "overfitting"
+    ],
+    "tags": [
+      "feature-engineering",
+      "model-training",
+      "data-preparation",
+      "fe"
+    ]
+  },
+  {
+    "term": "Data Labeling",
+    "slug": "data-labeling",
+    "category": "ml_fundamentals",
+    "difficulty": "beginner",
+    "definition": "The process of tagging or annotating raw data with meaningful identifiers so a machine learning model can learn from it. For example, marking emails as 'spam' or 'not spam,' or drawing boxes around objects in images to identify them. Without labeled data, most models have no way of knowing what correct answers look like.",
+    "analogy": "Like hiring a team of reviewers to watch thousands of customer service calls and mark each one as 'resolved' or 'unresolved' before a model can learn to predict outcomes on its own.",
+    "use_in_a_sentence": "Before building their loan default model, the bank spent three months on data labeling — manually flagging past applications as approved, denied, or defaulted so the model had reliable examples to learn from.",
+    "business_context": "The quality of data labeling directly determines how accurate a model will be in production. Errors or inconsistencies introduced during labeling can quietly degrade model performance and lead to costly business mistakes.",
+    "related_terms": [
+      "supervised-learning",
+      "training-data",
+      "label",
+      "ground-truth"
+    ],
+    "tags": [
+      "core",
+      "data-preparation",
+      "model-training",
+      "annotation"
+    ]
   }
 ]

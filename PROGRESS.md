@@ -254,6 +254,74 @@ Built a complete Streamlit-based AI literacy tool from scratch in a single sessi
 
 ---
 
+### Phase 13: Security Review & Hardening
+
+**Goal:** Audit the codebase for vulnerabilities before pushing to a public GitHub repo.
+
+**Findings and fixes:**
+
+| Finding | Severity | Action Taken |
+|---|---|---|
+| XSS in tag rendering — `tags` from JSON injected into `unsafe_allow_html` without escaping | HIGH | Added `html.escape()` to both `_render_tags()` and `_render_difficulty_badge()` in `ui/term_card.py` |
+| `.gitignore` missing `.env`, `*.key`, `*.pem`, `*.log` entries | Low | Added all missing patterns |
+| `requirements.txt` redundant with `pyproject.toml` | Low | Removed, then re-added with pinned versions matching `pyproject.toml` for Railway compatibility |
+| Removed stale `main.py` stub left over from `uv init` | Low | Deleted |
+
+**No credentials, API keys, or PII found anywhere in the codebase.**
+
+---
+
+### Phase 14: GitHub Repository & Railway Deployment
+
+**Goal:** Push to public GitHub and deploy to Railway.
+
+**What was done:**
+- Created public GitHub repo: `NavyDevilDoc/ai-tutorial`
+- Initial commit with all 39 files (4,463 lines)
+- Created `Procfile` for Railway: `web: streamlit run app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true`
+- `requirements.txt` with pinned versions for Railway's Python buildpack
+- Deployed to Railway via dashboard (GitHub repo connection)
+- Verified live environment matches local behavior
+
+---
+
+### Phase 15: Term Authoring CLI (Stage 1 of Content Pipeline)
+
+**Goal:** Build a repeatable, validated workflow for adding new terms — with an eye toward future automation.
+
+**What was built:** `tools/add_term.py` — a CLI tool with three operating modes:
+
+1. **LLM-assisted** (default when `ANTHROPIC_API_KEY` is set):
+   - Requires only 3 inputs: term name, category, difficulty
+   - Loads 3 existing terms from the target category as few-shot examples
+   - Calls Claude Sonnet to generate the full 10-field entry matching the glossary's style
+   - Human reviews → approve / edit individual fields / regenerate / cancel
+
+2. **Manual** (`--no-llm` flag or no API key):
+   - Interactive prompts for all 10 fields with validation hints
+
+3. **Automated** (`--json-file path`):
+   - Accepts a pre-built JSON file — the pipeline entry point for Stages 2-3
+   - Validates and appends without interactive prompts
+
+**Validation guarantees (all modes):**
+- Pydantic `Term` model validation (all required fields, slug format, difficulty literal)
+- Slug uniqueness check against all existing 113 terms
+- Related-terms cross-reference warnings for dangling slugs
+- Refuses to write if validation fails
+
+**Dependencies added:** `anthropic>=0.84.0` as a dev dependency (not deployed to Railway)
+
+**Test:** Added "Compute" term to `ml_fundamentals.json` via the `--json-file` mode, verified all 32 tests pass.
+
+**Automation architecture for Stages 2-3:**
+- Stage 2: Streamlit form in app → creates GitHub Issue with structured JSON body (requires GitHub token)
+- Stage 3: GitHub Action on `term-approved` label → extracts JSON → runs `tools/add_term.py --json-file` → opens PR
+- Human-in-the-loop: two approval gates (add label + merge PR)
+- Full chain: User suggests in app → GitHub Issue → Label → Action runs CLI → PR → Merge → Railway auto-deploys
+
+---
+
 ## Final Project State
 
 ### Codebase
@@ -263,17 +331,18 @@ Built a complete Streamlit-based AI literacy tool from scratch in a single sessi
 | Entry point | `app.py` |
 | Core logic | `core/models.py`, `core/loader.py`, `core/search.py`, `core/navigation.py`, `core/constants.py` |
 | UI | `ui/sidebar.py`, `ui/term_card.py`, `ui/related_panel.py`, `ui/welcome.py` |
+| Tooling | `tools/add_term.py` |
 | Tests | `tests/conftest.py`, `tests/test_models.py`, `tests/test_loader.py`, `tests/test_search.py`, `tests/test_navigation.py`, `tests/test_browse.py` |
 | Data | 9 category JSON files + `_schema.json` |
-| Config | `pyproject.toml`, `requirements.txt`, `CLAUDE.md`, `README.md` |
+| Config | `pyproject.toml`, `requirements.txt`, `Procfile`, `CLAUDE.md`, `README.md` |
 
 ### Content
 
 | Metric | Count |
 |---|---|
-| Total terms | 112 |
+| Total terms | 113 |
 | Categories | 9 |
-| Beginner terms | 53 |
+| Beginner terms | 54 |
 | Intermediate terms | 51 |
 | Advanced terms | 8 |
 
@@ -296,8 +365,11 @@ Built a complete Streamlit-based AI literacy tool from scratch in a single sessi
 | Fuzzy search | rapidfuzz |
 | Data validation | Pydantic v2 |
 | Data format | JSON (one file per category) |
+| Term generation | Anthropic Claude API (dev tooling only) |
 | Testing | pytest |
 | Package management | uv |
+| Hosting | Railway (via GitHub integration) |
+| Source control | GitHub (`NavyDevilDoc/ai-tutorial`) |
 | Python | 3.12+ |
 
 ### Features Implemented
@@ -314,12 +386,22 @@ Built a complete Streamlit-based AI literacy tool from scratch in a single sessi
 - Permalink support (`?term=slug` in URL)
 - Theme-safe styling (light + dark mode)
 
+### Features Implemented (Tooling)
+
+- CLI term authoring tool with LLM-assisted generation
+- Few-shot prompting with existing terms as style examples
+- JSON file import mode for pipeline automation
+- Pydantic validation, slug uniqueness, and cross-reference checking on every write
+
 ### Out of Scope (Documented for Future)
 
 - Quiz/flashcard mode
 - User progress tracking
 - PDF export
 - Admin interface for editing terms
-- LLM API calls
 - Authentication
-- Deployment infrastructure beyond local/Streamlit Community Cloud
+
+### Planned Next (Stages 2-3 of Content Pipeline)
+
+- In-app term suggestion form → GitHub Issue (Stage 2)
+- GitHub Action for automated PR creation from approved suggestions (Stage 3)

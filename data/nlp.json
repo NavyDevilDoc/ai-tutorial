@@ -8,8 +8,16 @@
     "analogy": "Like cutting a sentence into individual words written on flashcards. The model cannot read a whole paragraph at once, so it works with one card at a time.",
     "use_in_a_sentence": "Our chatbot tokenizes each customer message into subword pieces before passing them to the language model for a response.",
     "business_context": "Tokenization affects model cost — API pricing for language models is typically based on the number of tokens processed.",
-    "related_terms": ["embedding", "transformer", "prompt", "token"],
-    "tags": ["core", "text-processing"]
+    "related_terms": [
+      "embedding",
+      "transformer",
+      "prompt",
+      "token"
+    ],
+    "tags": [
+      "core",
+      "text-processing"
+    ]
   },
   {
     "term": "Embedding",
@@ -20,8 +28,15 @@
     "analogy": "Like plotting cities on a map using latitude and longitude. Cities close together on the map are close in real life. Embeddings do the same thing for words — similar words end up near each other in number-space.",
     "use_in_a_sentence": "We used embeddings to find support tickets that were semantically similar, even when customers used completely different wording.",
     "business_context": "Embeddings power semantic search, recommendation engines, and document clustering across many industries.",
-    "related_terms": ["tokenization", "transformer", "feature"],
-    "tags": ["core", "representation"]
+    "related_terms": [
+      "tokenization",
+      "transformer",
+      "feature"
+    ],
+    "tags": [
+      "core",
+      "representation"
+    ]
   },
   {
     "term": "Transformer",
@@ -32,8 +47,17 @@
     "analogy": "Like a speed reader who can see an entire page at once and instantly highlight the most important sentences, rather than reading word by word from left to right.",
     "use_in_a_sentence": "The transformer-based model understood context well enough to distinguish 'bank' as a financial institution versus a river bank based on surrounding words.",
     "business_context": "Transformers are behind virtually all modern AI language tools — chatbots, translation services, document summarizers, and code assistants.",
-    "related_terms": ["tokenization", "embedding", "layer", "fine-tuning", "large-language-model"],
-    "tags": ["architecture", "foundational"]
+    "related_terms": [
+      "tokenization",
+      "embedding",
+      "layer",
+      "fine-tuning",
+      "large-language-model"
+    ],
+    "tags": [
+      "architecture",
+      "foundational"
+    ]
   },
   {
     "term": "Prompt",
@@ -44,8 +68,16 @@
     "analogy": "Like giving instructions to a very literal assistant. The clearer and more specific your instructions, the better the result you get back.",
     "use_in_a_sentence": "By refining our prompt to include examples of the desired output format, we improved the model's response accuracy by 30%.",
     "business_context": "Prompt engineering has become a valuable skill as companies integrate language models into customer service, content creation, and data analysis workflows.",
-    "related_terms": ["fine-tuning", "tokenization", "transformer", "large-language-model"],
-    "tags": ["core", "usage"]
+    "related_terms": [
+      "fine-tuning",
+      "tokenization",
+      "transformer",
+      "large-language-model"
+    ],
+    "tags": [
+      "core",
+      "usage"
+    ]
   },
   {
     "term": "Fine-tuning",
@@ -56,8 +88,17 @@
     "analogy": "Like a general practitioner going through a residency to become a specialist. The doctor already has broad medical knowledge and now focuses on one area.",
     "use_in_a_sentence": "We fine-tuned a general language model on our company's internal documents so it could answer employee questions about HR policies.",
     "business_context": "Fine-tuning lets companies customize powerful models without building one from scratch, dramatically reducing cost and time to deployment.",
-    "related_terms": ["transformer", "training-data", "prompt", "model", "foundation-model"],
-    "tags": ["model-training", "customization"]
+    "related_terms": [
+      "transformer",
+      "training-data",
+      "prompt",
+      "model",
+      "foundation-model"
+    ],
+    "tags": [
+      "model-training",
+      "customization"
+    ]
   },
   {
     "term": "Sentiment Analysis",
@@ -68,8 +109,15 @@
     "analogy": "Like a manager reading the room during a meeting. You pick up on whether people feel enthusiastic, frustrated, or indifferent based on what they say and how they say it.",
     "use_in_a_sentence": "We run sentiment analysis on all customer reviews overnight and flag any surge in negative sentiment for the product team to investigate.",
     "business_context": "Widely used for brand monitoring, customer feedback analysis, social media tracking, and call center quality assurance.",
-    "related_terms": ["classification", "tokenization", "large-language-model"],
-    "tags": ["core", "task-type"]
+    "related_terms": [
+      "classification",
+      "tokenization",
+      "large-language-model"
+    ],
+    "tags": [
+      "core",
+      "task-type"
+    ]
   },
   {
     "term": "Named Entity Recognition",
@@ -80,8 +128,16 @@
     "analogy": "Like a highlighter enthusiast reading a contract and color-coding every person (yellow), company (green), date (blue), and dollar amount (pink) they find.",
     "use_in_a_sentence": "Our contract analysis tool uses named entity recognition to automatically extract party names, effective dates, and payment terms from thousands of legal documents.",
     "business_context": "Saves enormous manual effort in legal, compliance, finance, and healthcare where documents must be parsed for specific information at scale.",
-    "related_terms": ["tokenization", "large-language-model", "classification"],
-    "tags": ["task-type", "extraction", "NER"]
+    "related_terms": [
+      "tokenization",
+      "large-language-model",
+      "classification"
+    ],
+    "tags": [
+      "task-type",
+      "extraction",
+      "NER"
+    ]
   },
   {
     "term": "Chatbot",
@@ -92,8 +148,16 @@
     "analogy": "Like an automated phone menu that actually understands what you are saying instead of just matching keywords. Modern chatbots can hold a real conversation rather than following a rigid script.",
     "use_in_a_sentence": "After deploying the AI chatbot on our website, 60% of customer questions were resolved without a human agent, freeing up the support team for complex cases.",
     "business_context": "Chatbots are one of the most visible AI applications in business. They reduce support costs but require careful design to avoid frustrating customers with bad answers.",
-    "related_terms": ["large-language-model", "prompt", "hallucination", "guardrails"],
-    "tags": ["core", "application"]
+    "related_terms": [
+      "large-language-model",
+      "prompt",
+      "hallucination",
+      "guardrails"
+    ],
+    "tags": [
+      "core",
+      "application"
+    ]
   },
   {
     "term": "Large Language Model",
@@ -104,8 +168,18 @@
     "analogy": "Like an incredibly well-read assistant who has read millions of books, articles, and websites. They cannot remember specific sources, but they have absorbed patterns of language and knowledge at enormous scale.",
     "use_in_a_sentence": "We integrated a large language model into our internal knowledge base so employees can ask questions in plain English instead of searching through documentation.",
     "business_context": "LLMs are reshaping customer service, content creation, coding, data analysis, and research. Understanding their strengths and limitations is essential for any AI strategy.",
-    "related_terms": ["transformer", "prompt", "hallucination", "foundation-model", "context-window"],
-    "tags": ["core", "foundational", "LLM"]
+    "related_terms": [
+      "transformer",
+      "prompt",
+      "hallucination",
+      "foundation-model",
+      "context-window"
+    ],
+    "tags": [
+      "core",
+      "foundational",
+      "LLM"
+    ]
   },
   {
     "term": "Hallucination",
@@ -116,8 +190,16 @@
     "analogy": "Like a student who does not know the answer to an exam question but writes a convincing-sounding paragraph anyway. It reads well, but the facts are made up.",
     "use_in_a_sentence": "We caught the chatbot hallucinating a company policy that does not exist, which is why we added a human review step before any AI-generated responses go to customers.",
     "business_context": "Hallucination is the top risk when deploying language models in customer-facing or decision-critical applications. Mitigation strategies include RAG, human review, and guardrails.",
-    "related_terms": ["large-language-model", "retrieval-augmented-generation", "guardrails", "responsible-ai"],
-    "tags": ["core", "risk"]
+    "related_terms": [
+      "large-language-model",
+      "retrieval-augmented-generation",
+      "guardrails",
+      "responsible-ai"
+    ],
+    "tags": [
+      "core",
+      "risk"
+    ]
   },
   {
     "term": "Retrieval-Augmented Generation",
@@ -128,8 +210,17 @@
     "analogy": "Like an open-book exam versus a closed-book exam. Instead of relying solely on memory, the model looks up relevant reference material before answering, which makes its responses more accurate and grounded.",
     "use_in_a_sentence": "By implementing RAG with our product documentation, the support chatbot went from making up answers to citing specific help articles with 95% accuracy.",
     "business_context": "RAG is the most popular approach for grounding AI in company-specific data without the cost and complexity of fine-tuning. It dramatically reduces hallucination.",
-    "related_terms": ["large-language-model", "hallucination", "embedding", "chatbot"],
-    "tags": ["core", "technique", "RAG"]
+    "related_terms": [
+      "large-language-model",
+      "hallucination",
+      "embedding",
+      "chatbot"
+    ],
+    "tags": [
+      "core",
+      "technique",
+      "RAG"
+    ]
   },
   {
     "term": "Token",
@@ -140,8 +231,15 @@
     "analogy": "Like syllables in spoken language. The word 'unbelievable' might be split into 'un,' 'believ,' and 'able' — three tokens that the model processes one at a time.",
     "use_in_a_sentence": "Our monthly API bill is based on token volume, so we optimized our prompts to use fewer tokens without losing quality.",
     "business_context": "Understanding tokens is essential for budgeting AI costs. A typical English word is about 1.3 tokens. Longer prompts and responses cost more.",
-    "related_terms": ["tokenization", "context-window", "large-language-model"],
-    "tags": ["core", "pricing"]
+    "related_terms": [
+      "tokenization",
+      "context-window",
+      "large-language-model"
+    ],
+    "tags": [
+      "core",
+      "pricing"
+    ]
   },
   {
     "term": "Context Window",
@@ -152,7 +250,195 @@
     "analogy": "Like the size of a desk. You can only spread out so many documents before things start falling off the edge. A bigger context window means a bigger desk for the model to work with.",
     "use_in_a_sentence": "We chose a model with a 128K context window so it could analyze entire contracts in one pass rather than processing them in small chunks.",
     "business_context": "Context window size determines what tasks a model can handle. Summarizing a 200-page report requires a large context window; answering a quick question does not.",
-    "related_terms": ["token", "large-language-model", "prompt"],
-    "tags": ["core", "capability"]
+    "related_terms": [
+      "token",
+      "large-language-model",
+      "prompt"
+    ],
+    "tags": [
+      "core",
+      "capability"
+    ]
+  },
+  {
+    "term": "GPT",
+    "slug": "gpt",
+    "category": "nlp",
+    "difficulty": "beginner",
+    "definition": "GPT (Generative Pre-trained Transformer) is a type of AI model trained on vast amounts of text that can generate human-like writing, answer questions, summarize documents, and hold conversations. It learns patterns in language by processing billions of examples before it ever reaches a user.",
+    "analogy": "Like an extremely well-read assistant who has absorbed millions of books, articles, and conversations and can now draft a reply, explain a concept, or continue any piece of writing you hand them — without needing to look anything up.",
+    "use_in_a_sentence": "Our legal team uses a GPT-based tool to produce first drafts of standard vendor contracts, cutting initial preparation time from two hours to fifteen minutes.",
+    "business_context": "GPT models are the engine behind many commercial AI products — from customer service chatbots to internal knowledge assistants — making them a key technology to evaluate when selecting or building AI-powered tools.",
+    "related_terms": [
+      "transformer",
+      "large-language-model",
+      "prompt",
+      "fine-tuning",
+      "tokenization"
+    ],
+    "tags": [
+      "generative",
+      "foundational",
+      "GPT",
+      "language-model"
+    ]
+  },
+  {
+    "term": "Prompt Engineering",
+    "slug": "prompt-engineering",
+    "category": "nlp",
+    "difficulty": "beginner",
+    "definition": "The practice of carefully designing and refining the instructions or questions you give to an AI language model in order to get more accurate, useful, or consistent responses. Small changes in wording can dramatically change the quality of the output.",
+    "analogy": "Like briefing a highly capable but very literal contractor. The more clearly you explain the task, the format you want, and any constraints upfront, the less time you spend correcting the results.",
+    "use_in_a_sentence": "Our marketing team spent a week on prompt engineering to get the AI copywriting tool to consistently produce on-brand product descriptions without needing heavy edits.",
+    "business_context": "Good prompt engineering can unlock significantly more value from AI tools your company already pays for, without any additional technical investment or model retraining. It is increasingly treated as a core business skill rather than a technical one.",
+    "related_terms": [
+      "large-language-model",
+      "fine-tuning",
+      "tokenization",
+      "transformer",
+      "hallucination"
+    ],
+    "tags": [
+      "core",
+      "productivity",
+      "generative-ai",
+      "pe"
+    ]
+  },
+  {
+    "term": "Temperature",
+    "slug": "temperature",
+    "category": "nlp",
+    "difficulty": "intermediate",
+    "definition": "A setting that controls how creative or predictable an AI model's responses are. A low temperature makes the model stick to safe, likely answers, while a high temperature encourages more varied, surprising, or imaginative outputs.",
+    "analogy": "Like adjusting a dial on a brainstorming session. Turned down low, you get a cautious colleague who only suggests tried-and-true ideas. Turned up high, you get a freewheeling creative who throws out unexpected, sometimes brilliant, sometimes off-the-wall suggestions.",
+    "use_in_a_sentence": "We set a low temperature for our automated contract-summary tool to keep outputs factual and consistent, but used a higher temperature for our marketing copy generator to produce fresher, more varied taglines.",
+    "business_context": "Choosing the right temperature directly affects output quality for your use case — customer-facing tools that require accuracy and reliability need lower settings, while creative applications benefit from higher ones.",
+    "related_terms": [
+      "large-language-model",
+      "prompt",
+      "inference",
+      "fine-tuning",
+      "hallucination"
+    ],
+    "tags": [
+      "generation",
+      "configuration",
+      "llm",
+      "text-generation"
+    ]
+  },
+  {
+    "term": "Few-Shot Learning",
+    "slug": "few-shot-learning",
+    "category": "nlp",
+    "difficulty": "intermediate",
+    "definition": "A technique where an AI model is given only a handful of examples — typically 2 to 10 — to learn how to handle a new type of task, without requiring full retraining. Instead of thousands of labeled samples, you simply show the model a few demonstrations of what you want, and it generalizes from there.",
+    "analogy": "Like briefing a new contractor with three sample reports before asking them to write their own. You are not sending them back to school — you are giving just enough examples for them to understand your expectations and style.",
+    "use_in_a_sentence": "Our legal team used few-shot learning to classify contract clauses by risk level, providing the model with just five labeled examples per category instead of building a full training dataset.",
+    "business_context": "Few-shot learning dramatically reduces the time and cost of adapting AI to niche business tasks, making it practical to deploy custom solutions without large data labeling projects.",
+    "related_terms": [
+      "prompt",
+      "fine-tuning",
+      "large-language-model",
+      "zero-shot-learning"
+    ],
+    "tags": [
+      "prompting",
+      "fsl",
+      "training",
+      "efficiency"
+    ]
+  },
+  {
+    "term": "Zero-Shot Learning",
+    "slug": "zero-shot-learning",
+    "category": "nlp",
+    "difficulty": "intermediate",
+    "definition": "The ability of an AI model to perform a task it was never explicitly trained on, simply by understanding a description or instruction. Instead of needing examples, the model relies on general knowledge it built up during training to handle brand-new situations.",
+    "analogy": "Like hiring an experienced employee who, on their first day, can handle a task they have never done before because you simply explain what you need. You do not have to run them through weeks of examples — they already understand enough to figure it out.",
+    "use_in_a_sentence": "We used a zero-shot model to classify incoming customer emails into new complaint categories without labeling hundreds of training examples first.",
+    "business_context": "Zero-shot learning dramatically reduces the time and cost of deploying AI for new tasks, since teams can skip the expensive data-labeling step and get results immediately just by writing clear instructions.",
+    "related_terms": [
+      "few-shot-learning",
+      "prompt",
+      "large-language-model",
+      "fine-tuning",
+      "transfer-learning"
+    ],
+    "tags": [
+      "prompting",
+      "generalization",
+      "zsl",
+      "classification"
+    ]
+  },
+  {
+    "term": "Semantic Search",
+    "slug": "semantic-search",
+    "category": "nlp",
+    "difficulty": "intermediate",
+    "definition": "A search method that finds results based on the meaning and intent behind a query, rather than just matching exact keywords. It understands that 'affordable laptops' and 'cheap computers' are asking for the same thing, even though none of the words overlap.",
+    "analogy": "Like asking a knowledgeable colleague to find a document for you. Instead of scanning for the exact words you used, they understand what you actually need and return the most relevant result — even if it was written using completely different language.",
+    "use_in_a_sentence": "After switching to semantic search on our product catalog, customers searching for 'something to help me sleep' were correctly matched to white noise machines and blackout curtains, not just items with the word 'sleep' in their title.",
+    "business_context": "Semantic search significantly improves customer-facing search tools, internal knowledge bases, and support portals by reducing dead-end queries and helping users find relevant content faster. Companies that adopt it typically see higher search engagement and lower support ticket volumes.",
+    "related_terms": [
+      "embedding",
+      "transformer",
+      "natural-language-processing"
+    ],
+    "tags": [
+      "search",
+      "retrieval",
+      "nlp",
+      "text-processing"
+    ]
+  },
+  {
+    "term": "Knowledge Graph",
+    "slug": "knowledge-graph",
+    "category": "nlp",
+    "difficulty": "intermediate",
+    "definition": "A structured database that stores facts as a web of connected entities and the relationships between them — for example, linking a company, its CEO, and the city where it is headquartered. Unlike a traditional database of rows and columns, a knowledge graph captures how things relate to each other, allowing AI systems to reason across those connections.",
+    "analogy": "Like a giant corkboard covered in index cards where each card represents a person, place, or thing, and colored strings connect cards that are related. You can follow any string to discover new connections — finding that a supplier is linked to a sanctioned country, for instance — in a way that a plain spreadsheet never could.",
+    "use_in_a_sentence": "Our sales team uses a knowledge graph to instantly surface which prospects are connected to existing customers through board memberships, partnerships, or shared investors.",
+    "business_context": "Knowledge graphs help organizations turn scattered data into actionable intelligence by making hidden relationships visible — powering smarter search, fraud detection, and customer 360 views. Companies that invest in them reduce time spent manually connecting dots across siloed systems.",
+    "related_terms": [
+      "embedding",
+      "named-entity-recognition",
+      "retrieval-augmented-generation",
+      "large-language-model",
+      "semantic-search"
+    ],
+    "tags": [
+      "knowledge-representation",
+      "graph",
+      "kg",
+      "reasoning"
+    ]
+  },
+  {
+    "term": "Natural Language Processing",
+    "slug": "natural-language-processing",
+    "category": "nlp",
+    "difficulty": "beginner",
+    "definition": "A branch of AI that enables computers to read, understand, and generate human language — whether written or spoken. It bridges the gap between the way people communicate naturally and the way computers process information.",
+    "analogy": "Like hiring a translator who not only converts your words into a language a computer understands, but also grasps tone, context, and meaning — so the machine can actually respond in a useful way.",
+    "use_in_a_sentence": "Our insurance company uses natural language processing to automatically scan incoming claim emails, extract key details, and route each case to the right department without manual review.",
+    "business_context": "NLP is the technology behind customer-facing tools like chatbots, voice assistants, and automated document processing — making it one of the most commercially deployed forms of AI across industries.",
+    "related_terms": [
+      "tokenization",
+      "embedding",
+      "transformer",
+      "large-language-model",
+      "sentiment-analysis"
+    ],
+    "tags": [
+      "nlp",
+      "core",
+      "foundational",
+      "text-processing"
+    ]
   }
 ]

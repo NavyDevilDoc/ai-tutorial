@@ -8,8 +8,15 @@
     "analogy": "Like a GPS map that becomes outdated as new roads are built and old ones close. The map was accurate when created but slowly drifts from reality.",
     "use_in_a_sentence": "We detected model drift in our pricing algorithm after consumer spending patterns shifted post-pandemic, triggering a retraining cycle.",
     "business_context": "Model drift is one of the top reasons ML projects fail in production. Continuous monitoring is essential to catch it early.",
-    "related_terms": ["monitoring", "pipeline", "training-data"],
-    "tags": ["core", "production"]
+    "related_terms": [
+      "monitoring",
+      "pipeline",
+      "training-data"
+    ],
+    "tags": [
+      "core",
+      "production"
+    ]
   },
   {
     "term": "Pipeline",
@@ -20,8 +27,16 @@
     "analogy": "Like a car assembly line where raw materials enter one end and a finished car rolls out the other. Each station performs one task automatically.",
     "use_in_a_sentence": "Our ML pipeline automatically retrains the fraud detection model every week using the latest transaction data.",
     "business_context": "Pipelines reduce human error and speed up the cycle from data collection to deployed model, which is critical for competitive advantage.",
-    "related_terms": ["endpoint", "monitoring", "model-drift", "feature-store"],
-    "tags": ["core", "automation"]
+    "related_terms": [
+      "endpoint",
+      "monitoring",
+      "model-drift",
+      "feature-store"
+    ],
+    "tags": [
+      "core",
+      "automation"
+    ]
   },
   {
     "term": "Endpoint",
@@ -32,8 +47,17 @@
     "analogy": "Like a drive-through window at a restaurant. You pull up, place your order (send data), and receive your meal (prediction) without going inside.",
     "use_in_a_sentence": "The mobile app sends customer photos to the model endpoint and receives a product recommendation within 200 milliseconds.",
     "business_context": "Endpoint reliability and response time directly affect user experience. Downtime means lost revenue for real-time applications.",
-    "related_terms": ["inference", "monitoring", "pipeline", "latency", "api"],
-    "tags": ["core", "deployment"]
+    "related_terms": [
+      "inference",
+      "monitoring",
+      "pipeline",
+      "latency",
+      "api"
+    ],
+    "tags": [
+      "core",
+      "deployment"
+    ]
   },
   {
     "term": "Monitoring",
@@ -44,8 +68,15 @@
     "analogy": "Like the dashboard in your car that shows speed, fuel level, and engine temperature. You need to keep an eye on key metrics to avoid breakdowns.",
     "use_in_a_sentence": "Our monitoring dashboard alerts the data science team whenever the model's prediction accuracy drops below 90%.",
     "business_context": "Without monitoring, a broken model can silently make bad decisions for weeks before anyone notices — costing real money.",
-    "related_terms": ["model-drift", "endpoint", "a-b-testing"],
-    "tags": ["core", "production"]
+    "related_terms": [
+      "model-drift",
+      "endpoint",
+      "a-b-testing"
+    ],
+    "tags": [
+      "core",
+      "production"
+    ]
   },
   {
     "term": "A/B Testing",
@@ -56,8 +87,15 @@
     "analogy": "Like a taste test between two cola brands. Half the people try brand A, half try brand B, and you compare the results to pick the winner.",
     "use_in_a_sentence": "We ran an A/B test between our old recommendation model and the new one, and the new model increased click-through rates by 12%.",
     "business_context": "A/B testing is the gold standard for validating that a new model actually improves business outcomes before fully rolling it out.",
-    "related_terms": ["monitoring", "model-drift", "pipeline"],
-    "tags": ["core", "evaluation"]
+    "related_terms": [
+      "monitoring",
+      "model-drift",
+      "pipeline"
+    ],
+    "tags": [
+      "core",
+      "evaluation"
+    ]
   },
   {
     "term": "Latency",
@@ -68,8 +106,15 @@
     "analogy": "Like the wait time between placing an order at a restaurant and getting your food. A fast-food counter has low latency; a fine dining kitchen has higher latency.",
     "use_in_a_sentence": "We need the fraud detection model to respond in under 100 milliseconds of latency so it does not slow down the checkout process.",
     "business_context": "Latency requirements vary by use case. Real-time applications like fraud detection need milliseconds; batch reporting can tolerate minutes or hours.",
-    "related_terms": ["endpoint", "throughput", "inference"],
-    "tags": ["core", "performance"]
+    "related_terms": [
+      "endpoint",
+      "throughput",
+      "inference"
+    ],
+    "tags": [
+      "core",
+      "performance"
+    ]
   },
   {
     "term": "Throughput",
@@ -80,8 +125,15 @@
     "analogy": "Like the number of cars a toll booth can process per hour. You can have low latency per car but still get backed up if throughput is too low for the traffic volume.",
     "use_in_a_sentence": "During Black Friday, we needed to scale our recommendation engine to handle 10x normal throughput without degrading response times.",
     "business_context": "Throughput and latency are the two key performance metrics for production AI. Scaling throughput typically means adding more servers, which directly impacts cost.",
-    "related_terms": ["latency", "endpoint", "batch-vs-real-time"],
-    "tags": ["core", "performance"]
+    "related_terms": [
+      "latency",
+      "endpoint",
+      "batch-vs-real-time"
+    ],
+    "tags": [
+      "core",
+      "performance"
+    ]
   },
   {
     "term": "Model Registry",
@@ -92,8 +144,15 @@
     "analogy": "Like a wine cellar with labeled racks. Every bottle (model) has a vintage year (version), tasting notes (performance metrics), and a record of when it was served (deployed).",
     "use_in_a_sentence": "When the new model caused issues in production, we rolled back to the previous version from the model registry within minutes.",
     "business_context": "A model registry is essential for governance, auditing, and quick rollbacks. Regulators increasingly expect companies to track which model made which decisions.",
-    "related_terms": ["pipeline", "monitoring", "responsible-ai"],
-    "tags": ["governance", "infrastructure"]
+    "related_terms": [
+      "pipeline",
+      "monitoring",
+      "responsible-ai"
+    ],
+    "tags": [
+      "governance",
+      "infrastructure"
+    ]
   },
   {
     "term": "Feature Store",
@@ -104,8 +163,15 @@
     "analogy": "Like a shared pantry of pre-prepped ingredients in a restaurant kitchen. Instead of every chef chopping onions from scratch, they all grab from the same container of already-diced onions.",
     "use_in_a_sentence": "After building a feature store, our data scientists cut new model development time by 40% because they could reuse features already built by other teams.",
     "business_context": "Feature stores prevent duplicate work, ensure consistency between training and production, and are a sign of a mature ML organization.",
-    "related_terms": ["feature", "pipeline", "training-data"],
-    "tags": ["infrastructure", "efficiency"]
+    "related_terms": [
+      "feature",
+      "pipeline",
+      "training-data"
+    ],
+    "tags": [
+      "infrastructure",
+      "efficiency"
+    ]
   },
   {
     "term": "Batch vs Real-Time",
@@ -116,8 +182,16 @@
     "analogy": "Like mail delivery versus texting. The postal service collects and delivers everything in batches once a day, while a text message is delivered the instant you send it.",
     "use_in_a_sentence": "We run churn predictions in batch overnight for the marketing team's weekly campaign, but fraud detection must be real-time for every transaction.",
     "business_context": "Choosing batch vs real-time is a major architecture decision. Real-time is more expensive but necessary when decisions must happen in the moment.",
-    "related_terms": ["latency", "throughput", "endpoint", "pipeline"],
-    "tags": ["core", "architecture"]
+    "related_terms": [
+      "latency",
+      "throughput",
+      "endpoint",
+      "pipeline"
+    ],
+    "tags": [
+      "core",
+      "architecture"
+    ]
   },
   {
     "term": "Containerization",
@@ -128,8 +202,15 @@
     "analogy": "Like a shipping container that fits on any truck, train, or ship. Everything the model needs is packed inside, so it works the same way regardless of where you deploy it.",
     "use_in_a_sentence": "By containerizing our models, we eliminated the 'it works on my machine' problem and can now deploy to any cloud provider within minutes.",
     "business_context": "Containerization (using tools like Docker) is standard practice for deploying AI models. It ensures reliability and makes it easy to scale up or move between cloud providers.",
-    "related_terms": ["endpoint", "pipeline", "api"],
-    "tags": ["infrastructure", "deployment"]
+    "related_terms": [
+      "endpoint",
+      "pipeline",
+      "api"
+    ],
+    "tags": [
+      "infrastructure",
+      "deployment"
+    ]
   },
   {
     "term": "API",
@@ -140,7 +221,35 @@
     "analogy": "Like a waiter in a restaurant. You (the application) tell the waiter (API) what you want, the waiter takes your order to the kitchen (model), and brings back your meal (prediction). You never need to enter the kitchen yourself.",
     "use_in_a_sentence": "Our mobile app calls the AI vendor's API to generate personalized workout plans, paying per request based on usage.",
     "business_context": "APIs are how most companies access AI capabilities — either from internal models or from vendors like OpenAI, Anthropic, and Google. Understanding API pricing and rate limits is essential for budgeting.",
-    "related_terms": ["endpoint", "latency", "inference"],
-    "tags": ["core", "integration"]
+    "related_terms": [
+      "endpoint",
+      "latency",
+      "inference"
+    ],
+    "tags": [
+      "core",
+      "integration"
+    ]
+  },
+  {
+    "term": "Edge AI",
+    "slug": "edge-ai",
+    "category": "mlops",
+    "difficulty": "intermediate",
+    "definition": "The practice of running AI models directly on a local device — such as a smartphone, camera, or factory sensor — rather than sending data to a remote server for processing. This allows the device to make predictions instantly, without needing an internet connection.",
+    "analogy": "Like a security guard stationed at the building entrance who decides on the spot who to let in, rather than calling headquarters and waiting for approval every time someone walks up.",
+    "use_in_a_sentence": "Our retail stores deployed Edge AI on in-store cameras to detect low shelf inventory in real time, even in locations with unreliable internet connections.",
+    "business_context": "Edge AI reduces response times, lowers cloud computing costs, and keeps sensitive data on-site rather than transmitting it externally — all of which matter for both cost control and regulatory compliance.",
+    "related_terms": [
+      "inference",
+      "latency",
+      "endpoint"
+    ],
+    "tags": [
+      "edge",
+      "deployment",
+      "real-time",
+      "edge-ai"
+    ]
   }
 ]
