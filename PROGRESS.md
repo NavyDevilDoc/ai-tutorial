@@ -441,6 +441,42 @@ This phase was entirely debugging — every component worked in isolation but th
 
 ---
 
+### Phase 20: Term Relationship Graph + Batch Import Mode
+
+**Goal:** Two feature additions — an interactive network graph showing how terms connect, and a batch import mode that fixes the sequential ordering problem from Phase 16.
+
+#### Feature 1: Term Relationship Network Graph
+
+**What was built:**
+- `core/graph.py` — Pure graph construction logic using networkx. `build_term_graph()` creates a network centered on the selected term with related terms as connected nodes. `get_graph_layout()` computes spring layout positions. `get_node_color()` maps difficulty to hex colors.
+- `ui/graph.py` — Plotly rendering inside a collapsible `st.expander("Term Relationships")`. Nodes color-coded by difficulty (green/orange/red), center term displayed larger. Transparent background works in both light and dark themes.
+- `ui/term_card.py` — Graph rendered at the bottom of every term card when `terms_by_slug` is available.
+
+**Design decisions:**
+- Graph is a **visual map**, not a navigation control. Plotly charts in Streamlit don't support click callbacks natively, so the existing Related Terms sidebar buttons remain the navigation mechanism. The graph supplements by showing the broader relationship picture.
+- Rendered inside an expander (collapsed by default) to keep the term card clean for users who just want definitions.
+- Used networkx (lightweight, stdlib-style API) + Plotly (already bundled with Streamlit) to minimize new dependencies.
+
+**Dependencies added:** `networkx>=3.0`, `plotly>=6.0`
+
+**Deprecation fix:** Streamlit deprecated `use_container_width` on `st.plotly_chart()` — replaced with `width="stretch"` before pushing.
+
+**Tests:** 7 new tests in `test_graph.py` — center node presence, related node inclusion, edge connections, missing slug handling, empty related terms, layout positions, color mapping.
+
+#### Feature 2: Batch Import Mode for CLI
+
+**What was built:**
+- `tools/add_term.py` — New `--batch-dir` flag reads all `.json` files from a directory. `--json-file` now also accepts JSON arrays (not just single objects). Both route to `batch_import()`.
+- `batch_import()` — Loads all terms, validates them as a combined set (existing + entire batch), then writes all at once. Atomic: if any term fails validation, nothing is written.
+- `_validate_batch()` — Two-pass validation. First pass collects all slugs in the batch. Second pass validates each term against the union of existing + batch slugs. This is what makes mutual cross-references work.
+- `validate_term_against(term_data, existing_slugs)` — Refactored from `validate_term()` to accept a pre-loaded slug set, eliminating the per-term disk load that made batch operations expensive. Original `validate_term()` preserved as a backward-compatible wrapper.
+
+**This solves the Phase 16 ordering problem:** Terms that reference each other (e.g., Few-Shot Learning ↔ Zero-Shot Learning) can now be added in a single batch without errors, because the validator sees the complete set before checking any references.
+
+**Tests:** 9 new tests in `test_batch_import.py` — mutual references pass, duplicate-within-batch detected, duplicate-with-existing detected, schema errors caught, atomic rollback verified, directory loading, validate_term_against unit tests.
+
+---
+
 ## Final Project State
 
 ### Codebase
@@ -478,7 +514,9 @@ This phase was entirely debugging — every component worked in isolation but th
 | test_sanitize.py | 11 | Text sanitization, HTML stripping, truncation, issue body JSON construction |
 | test_github_api.py | 5 | Issue creation, token handling, error messages, header verification |
 | test_process_approved_term.py | 6 | Issue body extraction, JSON parsing, category/difficulty validation, injection |
-| **Total** | **54** (up from 18 at MVP) | |
+| test_graph.py | 7 | Graph construction, node/edge presence, layout, missing slugs, colors |
+| test_batch_import.py | 9 | Batch validation, mutual refs, duplicates, atomic rollback, directory load |
+| **Total** | **70** (up from 18 at MVP) | |
 
 ### Tech Stack
 
@@ -488,6 +526,7 @@ This phase was entirely debugging — every component worked in isolation but th
 | Fuzzy search | rapidfuzz |
 | Data validation | Pydantic v2 |
 | Data format | JSON (one file per category) |
+| Graph visualization | networkx + Plotly |
 | Term generation | Anthropic Claude API (dev tooling only) |
 | Testing | pytest |
 | Package management | uv |
@@ -508,6 +547,7 @@ This phase was entirely debugging — every component worked in isolation but th
 - Welcome page with hero search and quick-start terms
 - Permalink support (`?term=slug` in URL)
 - Theme-safe styling (light + dark mode)
+- Term relationship network graph (Plotly, collapsible expander)
 
 ### Features Implemented (Tooling & Automation)
 
@@ -517,6 +557,7 @@ This phase was entirely debugging — every component worked in isolation but th
 - GitHub Action: label-triggered term generation → PR creation
 - 3-layer input validation: sanitize at form → re-sanitize in Action → Pydantic validates before write
 - Safe error logging with automatic API key redaction
+- Batch import mode with atomic validation (--batch-dir, JSON array support)
 - Branch protection on `main`
 
 ### Out of Scope (Documented for Future)
