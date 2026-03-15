@@ -8,8 +8,16 @@
     "analogy": "Like a student learning from a textbook with an answer key. The model studies examples where the right answer is already provided.",
     "use_in_a_sentence": "Our team used supervised learning to train a model that predicts customer churn based on historical account data.",
     "business_context": "Common in fraud detection, customer segmentation, and demand forecasting.",
-    "related_terms": ["unsupervised-learning", "training-data", "label", "model"],
-    "tags": ["core", "model-training"]
+    "related_terms": [
+      "unsupervised-learning",
+      "training-data",
+      "label",
+      "model"
+    ],
+    "tags": [
+      "core",
+      "model-training"
+    ]
   },
   {
     "term": "Unsupervised Learning",
@@ -20,8 +28,15 @@
     "analogy": "Like sorting a pile of photos into groups without anyone telling you what the categories should be. You notice natural clusters yourself.",
     "use_in_a_sentence": "We applied unsupervised learning to our transaction data and discovered three distinct customer spending patterns we hadn't known about.",
     "business_context": "Used for customer segmentation, anomaly detection, and market basket analysis.",
-    "related_terms": ["supervised-learning", "training-data", "feature"],
-    "tags": ["core", "model-training"]
+    "related_terms": [
+      "supervised-learning",
+      "training-data",
+      "feature"
+    ],
+    "tags": [
+      "core",
+      "model-training"
+    ]
   },
   {
     "term": "Model",
@@ -32,8 +47,16 @@
     "analogy": "Like a recipe that a chef has perfected through practice. The recipe (model) captures the chef's learned knowledge so anyone can follow it to produce a good result.",
     "use_in_a_sentence": "After training, the model could predict next quarter's sales within 5% accuracy based on historical trends.",
     "business_context": "Models power recommendations, forecasts, fraud alerts, and many other automated business decisions.",
-    "related_terms": ["training-data", "inference", "supervised-learning", "overfitting"],
-    "tags": ["core", "foundational"]
+    "related_terms": [
+      "training-data",
+      "inference",
+      "supervised-learning",
+      "overfitting"
+    ],
+    "tags": [
+      "core",
+      "foundational"
+    ]
   },
   {
     "term": "Feature",
@@ -44,8 +67,15 @@
     "analogy": "Like the vital signs a doctor checks during a physical — blood pressure, heart rate, temperature. Each measurement is a separate feature that helps form a diagnosis.",
     "use_in_a_sentence": "We selected purchase frequency, average order value, and account age as the key features for our customer lifetime value model.",
     "business_context": "Choosing the right features is often more important than choosing the right algorithm. Business domain expertise is critical here.",
-    "related_terms": ["label", "training-data", "model"],
-    "tags": ["core", "data-preparation"]
+    "related_terms": [
+      "label",
+      "training-data",
+      "model"
+    ],
+    "tags": [
+      "core",
+      "data-preparation"
+    ]
   },
   {
     "term": "Label",
@@ -56,8 +86,15 @@
     "analogy": "Like the answer key at the back of a math workbook. Labels tell the model what the right answer was for each example so it can learn the pattern.",
     "use_in_a_sentence": "Each row in our training data was labeled as either 'fraud' or 'legitimate' so the model could learn to distinguish between them.",
     "business_context": "Creating accurate labels often requires human review, which can be the most expensive part of an ML project.",
-    "related_terms": ["supervised-learning", "feature", "training-data"],
-    "tags": ["core", "data-preparation"]
+    "related_terms": [
+      "supervised-learning",
+      "feature",
+      "training-data"
+    ],
+    "tags": [
+      "core",
+      "data-preparation"
+    ]
   },
   {
     "term": "Training Data",
@@ -68,8 +105,16 @@
     "analogy": "Like the practice problems a student works through before an exam. The more representative the practice material, the better the student performs on new questions.",
     "use_in_a_sentence": "We assembled two years of historical sales data as training data for our demand forecasting model.",
     "business_context": "Data quality and quantity directly impact model performance. Garbage in, garbage out applies strongly here.",
-    "related_terms": ["supervised-learning", "feature", "label", "overfitting"],
-    "tags": ["core", "data-preparation"]
+    "related_terms": [
+      "supervised-learning",
+      "feature",
+      "label",
+      "overfitting"
+    ],
+    "tags": [
+      "core",
+      "data-preparation"
+    ]
   },
   {
     "term": "Inference",
@@ -80,8 +125,15 @@
     "analogy": "Like a graduate applying what they learned in school to real-world problems. The learning phase is over — now it is time to perform.",
     "use_in_a_sentence": "Our recommendation engine runs inference in real time, generating personalized product suggestions as each customer browses the site.",
     "business_context": "Inference speed and cost are key factors when deploying models at scale. Faster inference means better user experience.",
-    "related_terms": ["model", "endpoint", "monitoring"],
-    "tags": ["core", "deployment"]
+    "related_terms": [
+      "model",
+      "endpoint",
+      "monitoring"
+    ],
+    "tags": [
+      "core",
+      "deployment"
+    ]
   },
   {
     "term": "Classification",
@@ -92,8 +144,16 @@
     "analogy": "Like a bouncer at a club checking IDs and sorting people into 'allowed in' or 'turned away.' The decision is always one category or the other.",
     "use_in_a_sentence": "We built a classification model that routes incoming support tickets to the correct department with 92% accuracy.",
     "business_context": "Classification is one of the most common ML tasks in business — used for spam filtering, medical diagnosis, credit approval, and content moderation.",
-    "related_terms": ["regression", "supervised-learning", "label", "accuracy"],
-    "tags": ["core", "task-type"]
+    "related_terms": [
+      "regression",
+      "supervised-learning",
+      "label",
+      "accuracy"
+    ],
+    "tags": [
+      "core",
+      "task-type"
+    ]
   },
   {
     "term": "Regression",
@@ -104,8 +164,16 @@
     "analogy": "Like estimating how much your grocery bill will be based on what is in your cart. The answer is a number on a sliding scale, not a yes-or-no category.",
     "use_in_a_sentence": "Our regression model predicts next month's revenue within a 7% margin, giving finance a reliable number for budget planning.",
     "business_context": "Regression powers forecasting across finance, supply chain, real estate pricing, and insurance risk scoring.",
-    "related_terms": ["classification", "supervised-learning", "feature", "model"],
-    "tags": ["core", "task-type"]
+    "related_terms": [
+      "classification",
+      "supervised-learning",
+      "feature",
+      "model"
+    ],
+    "tags": [
+      "core",
+      "task-type"
+    ]
   },
   {
     "term": "Reinforcement Learning",
@@ -116,8 +184,16 @@
     "analogy": "Like training a dog with treats. The dog tries different behaviors, gets a treat when it does something right, and gradually learns which actions lead to rewards.",
     "use_in_a_sentence": "The logistics company used reinforcement learning to optimize delivery routes, reducing fuel costs by 15% within three months.",
     "business_context": "Used in robotics, game AI, recommendation systems, and dynamic pricing. More complex to set up than supervised learning but powerful for sequential decision-making.",
-    "related_terms": ["supervised-learning", "unsupervised-learning", "model", "algorithm"],
-    "tags": ["core", "model-training"]
+    "related_terms": [
+      "supervised-learning",
+      "unsupervised-learning",
+      "model",
+      "algorithm"
+    ],
+    "tags": [
+      "core",
+      "model-training"
+    ]
   },
   {
     "term": "Algorithm",
@@ -128,8 +204,15 @@
     "analogy": "Like a cooking recipe — a precise sequence of steps that, if followed correctly, produces a predictable result every time.",
     "use_in_a_sentence": "The data science team evaluated three different algorithms before selecting the one that best balanced accuracy and speed for our use case.",
     "business_context": "You do not need to know how algorithms work internally, but understanding that different algorithms suit different problems helps you ask better questions in planning meetings.",
-    "related_terms": ["model", "supervised-learning", "training-data"],
-    "tags": ["core", "foundational"]
+    "related_terms": [
+      "model",
+      "supervised-learning",
+      "training-data"
+    ],
+    "tags": [
+      "core",
+      "foundational"
+    ]
   },
   {
     "term": "Prediction",
@@ -140,8 +223,16 @@
     "analogy": "Like a weather forecast. The forecaster uses historical patterns and current conditions to make their best guess about tomorrow, knowing it will not always be perfect.",
     "use_in_a_sentence": "The model's prediction was that this customer had a 78% likelihood of canceling their subscription within the next 30 days.",
     "business_context": "Predictions are only as good as the data and model behind them. Always pair predictions with a confidence level or error margin for better decision-making.",
-    "related_terms": ["inference", "model", "accuracy", "classification"],
-    "tags": ["core", "output"]
+    "related_terms": [
+      "inference",
+      "model",
+      "accuracy",
+      "classification"
+    ],
+    "tags": [
+      "core",
+      "output"
+    ]
   },
   {
     "term": "Accuracy",
@@ -152,8 +243,16 @@
     "analogy": "Like a basketball player's free-throw percentage. If they make 85 out of 100 shots, their accuracy is 85%.",
     "use_in_a_sentence": "Our email spam filter achieves 97% accuracy, but the 3% it misses still amounts to thousands of messages per day at our volume.",
     "business_context": "Accuracy is the simplest performance metric but can be misleading with imbalanced data — a model that always says 'no fraud' could be 99% accurate if fraud is rare.",
-    "related_terms": ["precision", "recall", "f1-score", "prediction"],
-    "tags": ["core", "evaluation"]
+    "related_terms": [
+      "precision",
+      "recall",
+      "f1-score",
+      "prediction"
+    ],
+    "tags": [
+      "core",
+      "evaluation"
+    ]
   },
   {
     "term": "Validation Data",
@@ -164,8 +263,15 @@
     "analogy": "Like practice quizzes a student takes between study sessions. They do not count toward the final grade but help the student gauge whether they are on track.",
     "use_in_a_sentence": "We held out 20% of our dataset as validation data and used it to detect overfitting before the model ever saw real production data.",
     "business_context": "Without validation data, teams have no way to know if a model is actually learning useful patterns or just memorizing the training set.",
-    "related_terms": ["training-data", "test-data", "overfitting"],
-    "tags": ["data-preparation", "evaluation"]
+    "related_terms": [
+      "training-data",
+      "test-data",
+      "overfitting"
+    ],
+    "tags": [
+      "data-preparation",
+      "evaluation"
+    ]
   },
   {
     "term": "Test Data",
@@ -176,8 +282,15 @@
     "analogy": "Like the final exam at the end of a course. The student has never seen these exact questions before, so the score reflects true understanding rather than memorization.",
     "use_in_a_sentence": "The model scored 94% on validation data but only 88% on the held-out test data, which gave us a more realistic expectation for production performance.",
     "business_context": "Test data provides the most honest assessment of model quality. Skipping this step is a common shortcut that leads to unpleasant surprises after deployment.",
-    "related_terms": ["training-data", "validation-data", "accuracy"],
-    "tags": ["data-preparation", "evaluation"]
+    "related_terms": [
+      "training-data",
+      "validation-data",
+      "accuracy"
+    ],
+    "tags": [
+      "data-preparation",
+      "evaluation"
+    ]
   },
   {
     "term": "Epoch",
@@ -188,8 +301,15 @@
     "analogy": "Like re-reading a textbook chapter multiple times before an exam. Each pass helps you notice details you missed before and reinforces what you already know.",
     "use_in_a_sentence": "After 50 epochs of training, the model's error rate plateaued, so we stopped early to save compute costs and avoid overfitting.",
     "business_context": "More epochs means more compute time and cost. Finding the right number of epochs is a practical trade-off between model quality and training budget.",
-    "related_terms": ["training-data", "backpropagation", "overfitting"],
-    "tags": ["model-training", "process"]
+    "related_terms": [
+      "training-data",
+      "backpropagation",
+      "overfitting"
+    ],
+    "tags": [
+      "model-training",
+      "process"
+    ]
   },
   {
     "term": "Logistic Regression",
@@ -200,8 +320,16 @@
     "analogy": "Like a hiring manager who scores each candidate on a 0-to-100 scale and then draws a line at 70 — anyone above gets an interview, anyone below does not. The score is continuous but the decision is binary.",
     "use_in_a_sentence": "We used logistic regression to predict which customers were likely to churn, and it gave us a probability score for each one that the marketing team used to prioritize outreach.",
     "business_context": "Logistic regression is often the first model teams try because it is fast, interpretable, and surprisingly effective. When stakeholders ask 'why did the model make this decision,' logistic regression can answer clearly.",
-    "related_terms": ["classification", "supervised-learning", "accuracy", "feature"],
-    "tags": ["classification-model", "interpretable"]
+    "related_terms": [
+      "classification",
+      "supervised-learning",
+      "accuracy",
+      "feature"
+    ],
+    "tags": [
+      "classification-model",
+      "interpretable"
+    ]
   },
   {
     "term": "Decision Tree",
@@ -212,8 +340,17 @@
     "analogy": "Like the game of 20 Questions. 'Is the customer over 30? Yes. Have they purchased in the last 90 days? No. Is their account older than a year? Yes.' Each answer narrows down the prediction.",
     "use_in_a_sentence": "The decision tree revealed that account age and login frequency were the two most important factors in predicting subscription cancellations.",
     "business_context": "Decision trees are valued for their transparency — you can literally draw the model as a flowchart and show stakeholders exactly how each decision is made. They are the building block of more powerful ensemble methods.",
-    "related_terms": ["random-forest", "classification", "regression", "feature"],
-    "tags": ["classification-model", "regression-model", "interpretable"]
+    "related_terms": [
+      "random-forest",
+      "classification",
+      "regression",
+      "feature"
+    ],
+    "tags": [
+      "classification-model",
+      "regression-model",
+      "interpretable"
+    ]
   },
   {
     "term": "Random Forest",
@@ -224,8 +361,17 @@
     "analogy": "Like asking 100 different doctors for a diagnosis instead of just one. Each doctor sees a slightly different set of test results, and you go with whatever diagnosis the majority agrees on.",
     "use_in_a_sentence": "Switching from a single decision tree to a random forest improved our fraud detection accuracy from 84% to 93% with minimal additional compute cost.",
     "business_context": "Random forests are a workhorse model in industry — accurate, resistant to overfitting, and relatively easy to tune. Choose Random Forest over Logistic Regression when your data has complex, non-linear relationships.",
-    "related_terms": ["decision-tree", "ensemble-method", "gradient-boosting", "overfitting"],
-    "tags": ["classification-model", "regression-model", "ensemble"]
+    "related_terms": [
+      "decision-tree",
+      "ensemble-method",
+      "gradient-boosting",
+      "overfitting"
+    ],
+    "tags": [
+      "classification-model",
+      "regression-model",
+      "ensemble"
+    ]
   },
   {
     "term": "Support Vector Machine",
@@ -236,8 +382,16 @@
     "analogy": "Like drawing a line on a table to separate red and blue marbles with as much empty space as possible between the line and the nearest marbles on each side. The wider the gap, the more confident the separation.",
     "use_in_a_sentence": "Our SVM model classifies customer support emails into urgent and non-urgent categories with 91% accuracy, routing critical issues to human agents immediately.",
     "business_context": "SVMs work well with smaller datasets and high-dimensional data (many features). They are less common in industry than they once were, but still appear in text classification and specialized applications.",
-    "related_terms": ["classification", "feature", "supervised-learning", "logistic-regression"],
-    "tags": ["classification-model", "SVM"]
+    "related_terms": [
+      "classification",
+      "feature",
+      "supervised-learning",
+      "logistic-regression"
+    ],
+    "tags": [
+      "classification-model",
+      "SVM"
+    ]
   },
   {
     "term": "K-Nearest Neighbors",
@@ -248,8 +402,17 @@
     "analogy": "Like moving to a new neighborhood and guessing what a house is worth by looking at the 5 closest houses that recently sold. You assume similar homes in the same area will have similar prices.",
     "use_in_a_sentence": "We used K-Nearest Neighbors to recommend products by finding the 10 customers most similar to the current user and suggesting what they bought.",
     "business_context": "kNN is intuitive and requires no training phase, but slows down with large datasets because it must compare every new point against all existing data. Best for smaller datasets or recommendation prototypes.",
-    "related_terms": ["classification", "regression", "feature", "supervised-learning"],
-    "tags": ["classification-model", "regression-model", "kNN"]
+    "related_terms": [
+      "classification",
+      "regression",
+      "feature",
+      "supervised-learning"
+    ],
+    "tags": [
+      "classification-model",
+      "regression-model",
+      "kNN"
+    ]
   },
   {
     "term": "Naive Bayes",
@@ -260,8 +423,16 @@
     "analogy": "Like a spam filter that checks each word in an email independently — 'free' adds some spam probability, 'winner' adds more, 'meeting' subtracts some. It tallies the evidence without considering word combinations.",
     "use_in_a_sentence": "Naive Bayes was our first-pass spam filter — it trained in seconds, handled millions of emails per day, and caught 95% of junk mail right out of the box.",
     "business_context": "Naive Bayes is extremely fast to train and run, making it ideal for real-time text classification at scale. It is a strong baseline model — often the first thing teams try for spam detection, sentiment analysis, and document categorization.",
-    "related_terms": ["classification", "supervised-learning", "sentiment-analysis", "logistic-regression"],
-    "tags": ["classification-model", "text-classification"]
+    "related_terms": [
+      "classification",
+      "supervised-learning",
+      "sentiment-analysis",
+      "logistic-regression"
+    ],
+    "tags": [
+      "classification-model",
+      "text-classification"
+    ]
   },
   {
     "term": "Ensemble Method",
@@ -272,8 +443,16 @@
     "analogy": "Like a panel of judges scoring a gymnastics routine instead of a single judge. Individual judges may have biases, but averaging their scores produces a fairer, more reliable result.",
     "use_in_a_sentence": "By combining three different models into an ensemble, we reduced prediction errors by 18% compared to our best individual model.",
     "business_context": "Ensemble methods are behind most winning solutions in ML competitions and are heavily used in production. The trade-off is increased complexity and compute cost for better accuracy.",
-    "related_terms": ["random-forest", "gradient-boosting", "decision-tree", "model"],
-    "tags": ["core", "technique"]
+    "related_terms": [
+      "random-forest",
+      "gradient-boosting",
+      "decision-tree",
+      "model"
+    ],
+    "tags": [
+      "core",
+      "technique"
+    ]
   },
   {
     "term": "Gradient Boosting",
@@ -284,7 +463,38 @@
     "analogy": "Like a team of editors reviewing a document in sequence. The first editor catches major errors, the second fixes what the first missed, the third polishes further — each pass targets the remaining flaws.",
     "use_in_a_sentence": "We switched from random forest to XGBoost (a gradient boosting library) and improved our revenue forecast accuracy by 6 percentage points.",
     "business_context": "Gradient boosting dominates structured/tabular data problems in industry — credit scoring, click prediction, demand forecasting. If your data lives in spreadsheets or databases, this is often the best non-deep-learning option.",
-    "related_terms": ["ensemble-method", "random-forest", "decision-tree", "overfitting"],
-    "tags": ["classification-model", "regression-model", "ensemble", "XGBoost"]
+    "related_terms": [
+      "ensemble-method",
+      "random-forest",
+      "decision-tree",
+      "overfitting"
+    ],
+    "tags": [
+      "classification-model",
+      "regression-model",
+      "ensemble",
+      "XGBoost"
+    ]
+  },
+  {
+    "term": "Compute",
+    "slug": "compute",
+    "category": "ml_fundamentals",
+    "difficulty": "beginner",
+    "definition": "The processing power — measured in GPU hours, CPU time, or cloud credits — required to train, fine-tune, or run an AI model. More complex models demand more compute.",
+    "analogy": "Like the electricity bill for a factory. A small workshop needs a little power, but a massive assembly line needs an enormous amount. Bigger AI models are bigger factories.",
+    "use_in_a_sentence": "The project stalled for two weeks because we ran out of cloud compute budget and had to request additional GPU allocation from IT.",
+    "business_context": "Compute is one of the three major AI costs alongside data and talent. Understanding compute requirements helps set realistic project timelines and budgets.",
+    "related_terms": [
+      "gpu",
+      "training-data",
+      "inference",
+      "total-cost-of-ownership"
+    ],
+    "tags": [
+      "core",
+      "infrastructure",
+      "cost"
+    ]
   }
 ]
