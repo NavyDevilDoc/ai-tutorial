@@ -167,8 +167,17 @@ def main() -> None:
     except ValueError as exc:
         print(f"Error processing issue #{issue_number}: {exc}")
         sys.exit(1)
-    except Exception:
-        print(f"Unexpected error processing issue #{issue_number}")
+    except Exception as exc:
+        # Log error type and message but never the full traceback
+        # (which could contain file paths, secrets, or API responses)
+        error_type = type(exc).__name__
+        error_msg = str(exc)
+        # Redact anything that looks like an API key
+        for prefix in ("sk-ant-", "ghp_", "github_pat_"):
+            if prefix in error_msg:
+                error_msg = f"[redacted — contains {prefix}... token]"
+                break
+        print(f"Error processing issue #{issue_number}: {error_type}: {error_msg}")
         sys.exit(1)
 
 
