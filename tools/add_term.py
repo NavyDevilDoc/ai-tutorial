@@ -244,11 +244,15 @@ def build_term_manually(
 # Validation
 # ---------------------------------------------------------------------------
 
-def validate_term(term_data: dict) -> tuple[bool, str]:
-    """Validate a term dict against the schema and existing data.
+def validate_term_against(
+    term_data: dict,
+    existing_slugs: set[str],
+) -> tuple[bool, str]:
+    """Validate a term dict against the schema and a set of known slugs.
 
     Args:
         term_data: The term dict to validate.
+        existing_slugs: Set of all slugs to check uniqueness and refs against.
 
     Returns:
         Tuple of (is_valid, error_message).
@@ -258,20 +262,33 @@ def validate_term(term_data: dict) -> tuple[bool, str]:
     except Exception as exc:
         return False, f"Schema validation failed: {exc}"
 
+    if term.slug in existing_slugs:
+        return False, f"Slug '{term.slug}' already exists"
+
+    for ref in term.related_terms:
+        if ref not in existing_slugs | {term.slug}:
+            print(f"  Warning: related term '{ref}' not found in glossary")
+
+    return True, ""
+
+
+def validate_term(term_data: dict) -> tuple[bool, str]:
+    """Validate a term dict against the schema and existing data.
+
+    Convenience wrapper that loads existing terms automatically.
+
+    Args:
+        term_data: The term dict to validate.
+
+    Returns:
+        Tuple of (is_valid, error_message).
+    """
     try:
         terms_by_slug, _ = _load_all_terms_impl()
     except Exception as exc:
         return False, f"Could not load existing terms: {exc}"
 
-    if term.slug in terms_by_slug:
-        return False, f"Slug '{term.slug}' already exists"
-
-    all_slugs = set(terms_by_slug.keys()) | {term.slug}
-    for ref in term.related_terms:
-        if ref not in all_slugs:
-            print(f"  Warning: related term '{ref}' not found in glossary")
-
-    return True, ""
+    return validate_term_against(term_data, set(terms_by_slug.keys()))
 
 
 # ---------------------------------------------------------------------------
@@ -300,6 +317,146 @@ def append_to_category(term_data: dict, category: str) -> Path:
         encoding="utf-8",
     )
     return file_path
+
+
+# ---------------------------------------------------------------------------
+# Batch import
+# ---------------------------------------------------------------------------
+
+def batch_import(source_path: Path) -> None:
+    """Import multiple terms with atomic validation.
+
+    All terms are validated as a combined set before any are written.
+    Mutual cross-references between new terms are allowed.
+
+    Args:
+        source_path: Path to a directory of .json files or a single
+            JSON file containing an array of term objects.
+    """
+    new_terms = _load_batch_terms(source_path)
+    if not new_terms:
+        print("No terms found to import.")
+        return
+
+    existing_slugs = _load_existing_slugs()
+    errors = _validate_batch(new_terms, existing_slugs)
+
+    if errors:
+        print(f"\nBatch validation failed ({len(errors)} errors):")
+        for slug, msg in errors:
+            print(f"  {slug}: {msg}")
+        print("\nNo terms were written.")
+        sys.exit(1)
+
+    _write_batch(new_terms)
+
+
+def _load_batch_terms(source_path: Path) -> list[dict]:
+    """Load term dicts from a file or directory.
+
+    Args:
+        source_path: Path to a .json file (single or array) or directory.
+
+    Returns:
+        List of raw term dicts.
+    """
+    if source_path.is_dir():
+        terms = []
+        for f in sorted(source_path.glob("*.json")):
+            raw = json.loads(f.read_text(encoding="utf-8"))
+            if isinstance(raw, list):
+                terms.extend(raw)
+            else:
+                terms.append(raw)
+        return terms
+
+    raw = json.loads(source_path.read_text(encoding="utf-8"))
+    if isinstance(raw, list):
+        return raw
+    return [raw]
+
+
+def _load_existing_slugs() -> set[str]:
+    """Load all existing slugs from the glossary.
+
+    Returns:
+        Set of slug strings.
+    """
+    try:
+        terms_by_slug, _ = _load_all_terms_impl()
+        return set(terms_by_slug.keys())
+    except Exception as exc:
+        print(f"Error loading existing terms: {exc}")
+        sys.exit(1)
+
+
+def _validate_batch(
+    new_terms: list[dict],
+    existing_slugs: set[str],
+) -> list[tuple[str, str]]:
+    """Validate all terms in a batch against existing + batch slugs.
+
+    Args:
+        new_terms: List of raw term dicts.
+        existing_slugs: Slugs already in the glossary.
+
+    Returns:
+        List of (slug, error_message) tuples. Empty if all valid.
+    """
+    errors: list[tuple[str, str]] = []
+    batch_slugs: set[str] = set()
+    combined = existing_slugs.copy()
+
+    # First pass: collect all slugs in the batch
+    for term_data in new_terms:
+        slug = term_data.get("slug", make_slug(term_data.get("term", "")))
+        batch_slugs.add(slug)
+    combined |= batch_slugs
+
+    # Second pass: validate each term
+    for term_data in new_terms:
+        slug = term_data.get("slug", "unknown")
+        try:
+            term = Term(**term_data)
+        except Exception as exc:
+            errors.append((slug, f"Schema error: {exc}"))
+            continue
+
+        if term.slug in existing_slugs:
+            errors.append((slug, "Slug already exists in glossary"))
+            continue
+
+        dupes = [t for t in new_terms if t.get("slug") == term.slug]
+        if len(dupes) > 1:
+            errors.append((slug, "Duplicate slug within batch"))
+            continue
+
+        for ref in term.related_terms:
+            if ref not in combined:
+                print(f"  Warning: '{slug}' references '{ref}' (not found)")
+
+    return errors
+
+
+def _write_batch(new_terms: list[dict]) -> None:
+    """Write all validated terms to their category files.
+
+    Args:
+        new_terms: List of validated term dicts.
+    """
+    by_category: dict[str, list[dict]] = {}
+    for term_data in new_terms:
+        cat = term_data["category"]
+        by_category.setdefault(cat, []).append(term_data)
+
+    total = 0
+    for category, terms in sorted(by_category.items()):
+        for term_data in terms:
+            append_to_category(term_data, category)
+            total += 1
+            print(f"  Added: {term_data['term']} -> {category}")
+
+    print(f"\nBatch complete: {total} terms added.")
 
 
 # ---------------------------------------------------------------------------
@@ -427,7 +584,11 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--json-file",
-        help="Path to a JSON file containing the term entry (bypasses prompts)",
+        help="Path to a JSON file (single object or array) for import",
+    )
+    parser.add_argument(
+        "--batch-dir",
+        help="Path to a directory of .json files for batch import",
     )
     return parser.parse_args()
 
@@ -436,9 +597,18 @@ def main() -> None:
     """Run the add-term CLI workflow."""
     args = parse_args()
 
-    # Mode 1: Import from JSON file (for automation)
+    # Mode 1a: Batch import from directory
+    if args.batch_dir:
+        batch_import(Path(args.batch_dir))
+        return
+
+    # Mode 1b: Import from JSON file (single or array)
     if args.json_file:
-        raw = json.loads(Path(args.json_file).read_text(encoding="utf-8"))
+        source = Path(args.json_file)
+        raw = json.loads(source.read_text(encoding="utf-8"))
+        if isinstance(raw, list):
+            batch_import(source)
+            return
         is_valid, error = validate_term(raw)
         if not is_valid:
             print(f"Validation failed: {error}")

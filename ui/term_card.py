@@ -12,6 +12,7 @@ from core.constants import (
 )
 from core.models import Term
 from core.navigation import pop_term_history
+from ui.graph import render_term_graph
 
 _CARD_STYLES: str = """
 <style>
@@ -127,3 +128,6 @@ def render_term_card(
     st.write(term.business_context)
 
     _render_tags(term.tags)
+
+    if terms_by_slug:
+        render_term_graph(term, terms_by_slug)

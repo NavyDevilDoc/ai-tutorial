@@ -4,6 +4,8 @@ version = "0.1.0"
 description = "AI Literacy Tutor — plain-language AI/ML glossary for non-technical professionals"
 requires-python = ">=3.12"
 dependencies = [
+    "networkx>=3.6.1",
+    "plotly>=6.6.0",
     "pydantic>=2.12.5",
     "rapidfuzz>=3.14.3",
     "streamlit>=1.55.0",
