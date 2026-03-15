@@ -251,5 +251,27 @@
       "real-time",
       "edge-ai"
     ]
+  },
+  {
+    "term": "Hallucination Rate",
+    "slug": "hallucination-rate",
+    "category": "mlops",
+    "difficulty": "intermediate",
+    "definition": "The percentage of AI-generated outputs that contain confident but factually incorrect, invented, or nonsensical information. It measures how often a model 'makes things up' rather than acknowledging the limits of its knowledge.",
+    "analogy": "Like a new employee who, rather than admitting they don't know the answer to a customer's question, invents a plausible-sounding response with complete confidence — creating a bigger problem than a simple 'I don't know' would have.",
+    "use_in_a_sentence": "After piloting an AI assistant for our legal team, we measured a 12% hallucination rate on case-citation queries, which was too high to deploy without a human review step.",
+    "business_context": "A high hallucination rate creates legal, reputational, and compliance risks, especially in regulated industries like finance, healthcare, and law. Tracking this metric is essential before trusting a generative AI model with customer-facing or high-stakes tasks.",
+    "related_terms": [
+      "model-drift",
+      "monitoring",
+      "inference",
+      "large-language-model"
+    ],
+    "tags": [
+      "generative-ai",
+      "llm",
+      "reliability",
+      "production"
+    ]
   }
 ]
