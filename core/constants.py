@@ -24,6 +24,18 @@ QUICK_START_SLUGS: list[str] = [
     "a-b-testing",
 ]
 
+SUGGEST_TERM_HEADING: str = "Suggest a New Term"
+SUGGEST_TERM_SUBTEXT: str = (
+    "Know an AI/ML term that should be in our glossary? "
+    "Submit a suggestion and we'll review it."
+)
+SUGGEST_SUCCESS_MSG: str = "Thanks! Your suggestion has been submitted for review."
+SUGGEST_RATE_LIMIT_MSG: str = (
+    "You've already submitted a suggestion this session. "
+    "Please try again later."
+)
+SUGGEST_ERROR_MSG: str = "Something went wrong submitting your suggestion. Please try again."
+
 ANALOGY_PREFIX: str = "\U0001f4a1 Analogy"
 SENTENCE_PREFIX: str = "\U0001f4bc Use in a Sentence"
 

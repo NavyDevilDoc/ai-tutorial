@@ -1,0 +1,66 @@
+name: Generate Term from Approved Issue
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  generate-term:
+    if: github.event.label.name == 'term-approved'
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install pydantic anthropic rapidfuzz
+
+      - name: Process approved term
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: python .github/scripts/process_approved_term.py
+
+      - name: Create PR from generated term
+        if: success()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          BRANCH_NAME="auto/term-from-issue-${ISSUE_NUMBER}"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH_NAME"
+          git add data/
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "Add term from issue #${ISSUE_NUMBER}"
+          git push origin "$BRANCH_NAME"
+          PR_URL=$(gh pr create \
+            --title "Add term from issue #${ISSUE_NUMBER}" \
+            --body "$(cat <<EOF
+          ## Auto-generated term
+
+          Generated from approved issue #${ISSUE_NUMBER}.
+          Please review the term content before merging.
+
+          - [ ] Definition is accurate and plain-language
+          - [ ] Analogy makes sense for a non-technical audience
+          - [ ] Related terms reference valid slugs
+          - [ ] Tags are appropriate
+          EOF
+          )" \
+            --base main \
+            --head "$BRANCH_NAME")
+          gh issue comment "$ISSUE_NUMBER" --body "PR created: ${PR_URL}"
