@@ -353,6 +353,94 @@ When adding terms in sequence, mutual cross-references cause failures. For examp
 
 ---
 
+### Phase 17: Stages 2-3 Implementation — Suggestion Pipeline + Security Hardening
+
+**Goal:** Build the full automated content pipeline: user suggests a term in the app → GitHub Issue → maintainer approves → Action generates term → PR created → merge → deploy.
+
+**What was built:**
+
+**Stage 2 — In-App Suggestion Form:**
+- `core/sanitize.py` — Input sanitization layer with 3-layer defense (sanitize at form entry, re-sanitize in Action, Pydantic validates before write). Strips HTML tags, control characters, null bytes. Constructs issue body with user input safely escaped via `json.dumps()`.
+- `core/github_api.py` — GitHub Issue creation via stdlib `urllib.request` (no new runtime dependencies). Token read from env var, never logged or included in error messages. Tested with mock that verifies token doesn't leak.
+- `ui/welcome.py` — Suggestion form at bottom of welcome page. Rate limited to 1 submission per session. Hidden when no `GITHUB_TOKEN` is configured.
+- `core/constants.py` — Added suggestion form display strings.
+
+**Stage 3 — GitHub Action Automation:**
+- `.github/workflows/term-from-issue.yml` — Triggers on `term-approved` label. Permissions explicitly scoped to `contents:write`, `pull-requests:write`, `issues:write`.
+- `.github/scripts/process_approved_term.py` — Extracts JSON from issue body (regex), re-sanitizes all fields as untrusted input, generates full term via Claude few-shot prompting, validates with Pydantic, strips dangling related_terms, appends to JSON file. Creates branch and PR.
+
+**Security hardening:**
+- Branch renamed `master` → `main` (modern convention)
+- Branch protection on `main` (initially required 1 approving review; relaxed for solo developer)
+- GitHub Fine-Grained PAT scoped to `NavyDevilDoc/ai-tutorial` with Issues R/W only
+- `ANTHROPIC_API_KEY` stored as GitHub Actions secret
+- `GITHUB_TOKEN` PAT stored as Railway environment variable
+- Safe error logging with automatic API key prefix redaction
+- 22 new tests covering sanitization, GitHub API, and Action script logic
+
+**Tests added:** 32 → 54
+
+---
+
+### Phase 18: Live Pipeline Debugging (The Gauntlet)
+
+**Goal:** Get the full pipeline working end-to-end in production.
+
+This phase was entirely debugging — every component worked in isolation but the live integration surfaced a chain of issues that had to be resolved sequentially.
+
+**Issue 1: Railway deployment failed — `refs/heads/master` not found**
+- **Cause:** Railway was configured to deploy from `master`, which we renamed to `main`.
+- **Fix:** Updated Railway service settings to deploy from `main`.
+
+**Issue 2: Suggestion form returned "Something went wrong"**
+- **Cause:** The GitHub Fine-Grained PAT was created without the Issues permission. The GitHub permissions UI for fine-grained tokens is non-obvious — the "Read and write" toggle only appears after checking the "Issues" checkbox in a nested dropdown under "+ Add permissions".
+- **Fix:** Created a new PAT with correct Issues R/W scope, updated Railway `GITHUB_TOKEN` variable.
+
+**Issue 3: GitHub labels not visible in issue UI**
+- **Cause:** Labels created via `gh label create` CLI were not appearing in the GitHub web UI label dropdown. Recreating via the REST API (`gh api repos/.../labels --method POST`) fixed the issue.
+- **Fix:** Deleted and recreated both `term-suggestion` and `term-approved` labels via the API.
+
+**Issue 4: GitHub Action triggered but skipped**
+- **Cause:** The `if: github.event.label.name == 'term-approved'` condition didn't match because the label wasn't actually persisting on the issue (UI issue — checking the box and clicking away didn't save). Applied labels via CLI instead.
+- **Fix:** Used `gh issue edit --add-label` to apply labels reliably.
+
+**Issue 5: Action failed — `ModuleNotFoundError: No module named 'streamlit'`**
+- **Cause:** The workflow installed `pydantic anthropic rapidfuzz` but not `streamlit`. The `core/loader.py` imports `streamlit` for the `@st.cache_resource` decorator, even though the Action only uses the pure loading logic.
+- **Fix:** Added `streamlit` to the Action's `pip install` step.
+
+**Issue 6: Action failed — "GitHub Actions is not permitted to create or approve pull requests"**
+- **Cause:** The repository's Actions settings didn't allow the workflow to create PRs. This is a separate setting from the workflow's `permissions` block.
+- **Fix:** Enabled via `gh api repos/.../actions/permissions/workflow --method PUT` with `can_approve_pull_request_reviews=true` and `default_workflow_permissions="write"`.
+
+**Issue 7: Action failed — `error: failed to push some refs`**
+- **Cause:** The branch `auto/term-from-issue-2` already existed from a previous failed run. Git refused to push to an existing remote branch.
+- **Fix:** Deleted the stale branch with `git push origin --delete auto/term-from-issue-2` and re-triggered.
+
+**Issue 8: Branch protection blocked our own fixes**
+- **Cause:** We set "require 1 approving review" on `main`, but as a solo developer you can't review your own PRs.
+- **Fix:** Relaxed branch protection to remove the review requirement while keeping force-push and deletion protections.
+
+**Resolution:** After fixing all 8 issues, the pipeline completed successfully:
+- "Hallucination Rate" suggested via the app → Issue #2 created → `term-approved` label added → Action generated term → PR #4 created → merged → Railway deployed.
+- "Explainable AI" submitted as a second test → Issue #3 → Action → PR → merged → deployed.
+
+**Key takeaway:** The architecture was sound — every component (sanitization, API calls, Action script, term generation, validation) worked correctly. The failures were all integration and permissions issues that only surface in a live environment. This is typical of CI/CD pipeline first-time setup.
+
+---
+
+### Phase 19: Documentation — ADD_A_TERM.md
+
+**Goal:** Formalize the three methods for adding terms into a single reference document.
+
+**What was created:** `ADD_A_TERM.md` covering:
+1. **Method 1: App suggestion form** — step-by-step for end users
+2. **Method 2: Label-based approval** — step-by-step for maintainers, including troubleshooting
+3. **Method 3: CLI tool** — all four modes (interactive LLM, manual, with args, JSON import)
+4. **Term schema reference** — all 10 fields with validation rules
+5. **Valid categories table**
+
+---
+
 ## Final Project State
 
 ### Codebase
@@ -360,21 +448,22 @@ When adding terms in sequence, mutual cross-references cause failures. For examp
 | Layer | Files |
 |---|---|
 | Entry point | `app.py` |
-| Core logic | `core/models.py`, `core/loader.py`, `core/search.py`, `core/navigation.py`, `core/constants.py` |
+| Core logic | `core/models.py`, `core/loader.py`, `core/search.py`, `core/navigation.py`, `core/constants.py`, `core/sanitize.py`, `core/github_api.py` |
 | UI | `ui/sidebar.py`, `ui/term_card.py`, `ui/related_panel.py`, `ui/welcome.py` |
 | Tooling | `tools/add_term.py` |
-| Tests | `tests/conftest.py`, `tests/test_models.py`, `tests/test_loader.py`, `tests/test_search.py`, `tests/test_navigation.py`, `tests/test_browse.py` |
+| Automation | `.github/workflows/term-from-issue.yml`, `.github/scripts/process_approved_term.py` |
+| Tests | `tests/conftest.py`, `tests/test_models.py`, `tests/test_loader.py`, `tests/test_search.py`, `tests/test_navigation.py`, `tests/test_browse.py`, `tests/test_sanitize.py`, `tests/test_github_api.py`, `tests/test_process_approved_term.py` |
 | Data | 9 category JSON files + `_schema.json` |
-| Config | `pyproject.toml`, `requirements.txt`, `Procfile`, `CLAUDE.md`, `README.md` |
+| Config | `pyproject.toml`, `requirements.txt`, `Procfile`, `CLAUDE.md`, `README.md`, `ADD_A_TERM.md` |
 
 ### Content
 
 | Metric | Count |
 |---|---|
-| Total terms | 129 |
+| Total terms | 131 |
 | Categories | 9 |
 | Beginner terms | 60 |
-| Intermediate terms | 61 |
+| Intermediate terms | 63 |
 | Advanced terms | 8 |
 
 ### Tests
@@ -386,7 +475,10 @@ When adding terms in sequence, mutual cross-references cause failures. For examp
 | test_search.py | 6 | Exact match, fuzzy match, gibberish, suggestions, category filter, tag search |
 | test_navigation.py | 6 | History push, pop, max depth, empty stack, no-op |
 | test_browse.py | 4 | Letter grouping, available letters, sorting, empty input |
-| **Total** | **32** | |
+| test_sanitize.py | 11 | Text sanitization, HTML stripping, truncation, issue body JSON construction |
+| test_github_api.py | 5 | Issue creation, token handling, error messages, header verification |
+| test_process_approved_term.py | 6 | Issue body extraction, JSON parsing, category/difficulty validation, injection |
+| **Total** | **54** (up from 18 at MVP) | |
 
 ### Tech Stack
 
@@ -417,12 +509,15 @@ When adding terms in sequence, mutual cross-references cause failures. For examp
 - Permalink support (`?term=slug` in URL)
 - Theme-safe styling (light + dark mode)
 
-### Features Implemented (Tooling)
+### Features Implemented (Tooling & Automation)
 
-- CLI term authoring tool with LLM-assisted generation
+- CLI term authoring tool with LLM-assisted generation (3 modes: interactive, manual, JSON import)
 - Few-shot prompting with existing terms as style examples
-- JSON file import mode for pipeline automation
-- Pydantic validation, slug uniqueness, and cross-reference checking on every write
+- In-app suggestion form with input sanitization and rate limiting
+- GitHub Action: label-triggered term generation → PR creation
+- 3-layer input validation: sanitize at form → re-sanitize in Action → Pydantic validates before write
+- Safe error logging with automatic API key redaction
+- Branch protection on `main`
 
 ### Out of Scope (Documented for Future)
 
@@ -431,8 +526,3 @@ When adding terms in sequence, mutual cross-references cause failures. For examp
 - PDF export
 - Admin interface for editing terms
 - Authentication
-
-### Planned Next (Stages 2-3 of Content Pipeline)
-
-- In-app term suggestion form → GitHub Issue (Stage 2)
-- GitHub Action for automated PR creation from approved suggestions (Stage 3)
