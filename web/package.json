@@ -1,0 +1,61 @@
+{
+  "name": "ai-tutorial-web",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "concurrently -n vite,api -c cyan,magenta \"npm:dev:vite\" \"npm:dev:server\"",
+    "dev:vite": "vite",
+    "dev:server": "tsx server/index.ts",
+    "build": "npm run validate:data && tsc -b && vite build",
+    "preview": "vite preview",
+    "start": "tsx server/index.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc -b --noEmit",
+    "validate:data": "tsx scripts/validate-data.ts"
+  },
+  "dependencies": {
+    "@hono/node-server": "^2.1.6",
+    "@hookform/resolvers": "^7.0.5",
+    "@radix-ui/react-label": "^2.1.17",
+    "@radix-ui/react-radio-group": "^1.5.1",
+    "@radix-ui/react-select": "^2.4.1",
+    "@radix-ui/react-slot": "^1.5.0",
+    "@xyflow/react": "^12.12.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "fuse.js": "^7.5.0",
+    "hono": "^4.13.17",
+    "lucide-react": "^1.71.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-hook-form": "^7.91.0",
+    "react-router-dom": "^7.18.5",
+    "tailwind-merge": "^3.7.0",
+    "tailwindcss-animate": "^1.0.7",
+    "tsx": "^4.19.1",
+    "zod": "^4.6.7",
+    "zustand": "^5.1.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.9",
+    "@types/node": "^22.7.5",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "autoprefixer": "^10.4.20",
+    "concurrently": "^10.0.7",
+    "jsdom": "^29.1.1",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13",
+    "typescript": "^5.6.2",
+    "vite": "^8.3.7",
+    "vitest": "^5.1.0"
+  }
+}

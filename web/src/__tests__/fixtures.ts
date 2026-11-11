@@ -1,0 +1,88 @@
+import type { Term } from "../models";
+
+export const VALID_TERM_DATA = {
+  term: "Test Term",
+  slug: "test-term",
+  category: "test_category",
+  difficulty: "beginner",
+  definition: "A term used for testing.",
+  analogy: "Like a crash test dummy for software.",
+  use_in_a_sentence: "We created a test term to verify the model.",
+  business_context: "Essential for quality assurance.",
+  related_terms: [],
+  tags: ["test"],
+} as const;
+
+export const SAMPLE_TERMS: Term[] = [
+  {
+    term: "Alpha Term",
+    slug: "alpha-term",
+    category: "test_category",
+    difficulty: "beginner",
+    definition: "The first test term used for validation.",
+    analogy: "Like the first domino in a chain — it starts everything off.",
+    use_in_a_sentence:
+      "We used the alpha term to verify our data loading pipeline worked correctly.",
+    business_context:
+      "Useful for initial testing and validation of new systems.",
+    related_terms: ["beta-term"],
+    tags: ["test", "core"],
+  },
+  {
+    term: "Beta Term",
+    slug: "beta-term",
+    category: "test_category",
+    difficulty: "intermediate",
+    definition: "The second test term that references the first.",
+    analogy:
+      "Like the second chapter of a book that builds on the introduction.",
+    use_in_a_sentence:
+      "The beta term confirmed that cross-references between terms resolved correctly.",
+    business_context: "Used to validate relationship mapping between entities.",
+    related_terms: ["alpha-term"],
+    tags: ["test", "validation"],
+  },
+  {
+    term: "Gamma Term",
+    slug: "gamma-term",
+    category: "other_category",
+    difficulty: "advanced",
+    definition:
+      "A term in a separate category for testing cross-category behavior.",
+    analogy:
+      "Like a foreign exchange student who brings a different perspective to the class.",
+    use_in_a_sentence:
+      "The gamma term helped us verify that filtering by category correctly excludes other categories.",
+    business_context: "Validates multi-category architecture.",
+    related_terms: ["delta-term"],
+    tags: ["test", "advanced"],
+  },
+  {
+    term: "Delta Term",
+    slug: "delta-term",
+    category: "other_category",
+    difficulty: "beginner",
+    definition: "A second term in the other category for count testing.",
+    analogy:
+      "Like the second instrument in a duet that completes the harmony.",
+    use_in_a_sentence:
+      "Delta term confirmed that per-category counts computed correctly across multiple entries.",
+    business_context: "Supports count and distribution testing.",
+    related_terms: ["gamma-term"],
+    tags: ["test", "beginner"],
+  },
+];
+
+export function sampleBySlug(): Map<string, Term> {
+  return new Map(SAMPLE_TERMS.map((t) => [t.slug, t]));
+}
+
+export function sampleByCategory(): Map<string, Term[]> {
+  const out = new Map<string, Term[]>();
+  for (const t of SAMPLE_TERMS) {
+    const list = out.get(t.category) ?? [];
+    list.push(t);
+    out.set(t.category, list);
+  }
+  return out;
+}
