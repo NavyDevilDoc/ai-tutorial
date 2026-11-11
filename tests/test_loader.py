@@ -1,18 +1,16 @@
 """Tests for the data loader module."""
 
 import json
-import tempfile
 from pathlib import Path
 
 import pytest
 
-from core.loader import (
-    _load_all_terms_impl,
+from core.data_loading import (
     compute_category_difficulty_counts,
     compute_term_counts,
+    load_all_terms_impl,
 )
 from core.models import Term
-import core.loader as loader_module
 
 
 @pytest.fixture
@@ -89,12 +87,9 @@ def dangling_ref_dir(tmp_path: Path) -> Path:
     return tmp_path
 
 
-def test_valid_data_loads_successfully(
-    valid_data_dir: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
+def test_valid_data_loads_successfully(valid_data_dir: Path) -> None:
     """Valid JSON should load without error and build correct lookups."""
-    monkeypatch.setattr(loader_module, "DATA_DIR", valid_data_dir)
-    terms_by_slug, terms_by_category = _load_all_terms_impl()
+    terms_by_slug, terms_by_category = load_all_terms_impl(data_dir=valid_data_dir)
 
     assert len(terms_by_slug) == 2
     assert "alpha" in terms_by_slug
@@ -103,32 +98,23 @@ def test_valid_data_loads_successfully(
     assert len(terms_by_category["test"]) == 2
 
 
-def test_invalid_schema_raises_value_error(
-    invalid_data_dir: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
+def test_invalid_schema_raises_value_error(invalid_data_dir: Path) -> None:
     """A term missing required fields should raise ValueError."""
-    monkeypatch.setattr(loader_module, "DATA_DIR", invalid_data_dir)
     with pytest.raises(ValueError, match="Invalid term"):
-        _load_all_terms_impl()
+        load_all_terms_impl(data_dir=invalid_data_dir)
 
 
-def test_dangling_related_terms_raises_value_error(
-    dangling_ref_dir: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
+def test_dangling_related_terms_raises_value_error(dangling_ref_dir: Path) -> None:
     """A related_terms slug pointing to nothing should raise ValueError."""
-    monkeypatch.setattr(loader_module, "DATA_DIR", dangling_ref_dir)
     with pytest.raises(ValueError, match="nonexistent"):
-        _load_all_terms_impl()
+        load_all_terms_impl(data_dir=dangling_ref_dir)
 
 
-def test_schema_file_is_skipped(
-    valid_data_dir: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
+def test_schema_file_is_skipped(valid_data_dir: Path) -> None:
     """Files starting with underscore should be skipped."""
     # Add a _schema.json that would fail if loaded
     (valid_data_dir / "_schema.json").write_text("{}", encoding="utf-8")
-    monkeypatch.setattr(loader_module, "DATA_DIR", valid_data_dir)
-    terms_by_slug, _ = _load_all_terms_impl()
+    terms_by_slug, _ = load_all_terms_impl(data_dir=valid_data_dir)
     assert len(terms_by_slug) == 2
 
 
@@ -177,7 +163,7 @@ def test_compute_category_difficulty_counts(
 
 def test_all_slugs_are_url_safe() -> None:
     """Every slug in production data should be safe for URL query params."""
-    terms_by_slug, _ = _load_all_terms_impl()
+    terms_by_slug, _ = load_all_terms_impl()
     for slug in terms_by_slug:
         assert slug == slug.lower(), f"Slug not lowercase: {slug}"
         assert " " not in slug, f"Slug contains space: {slug}"

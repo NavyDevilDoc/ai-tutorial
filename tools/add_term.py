@@ -21,7 +21,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from core.constants import CATEGORY_DISPLAY_NAMES
-from core.loader import _load_all_terms_impl
+from core.data_loading import load_all_terms_impl
 from core.models import Term
 
 DATA_DIR = PROJECT_ROOT / "data"
@@ -284,7 +284,7 @@ def validate_term(term_data: dict) -> tuple[bool, str]:
         Tuple of (is_valid, error_message).
     """
     try:
-        terms_by_slug, _ = _load_all_terms_impl()
+        terms_by_slug, _ = load_all_terms_impl()
     except Exception as exc:
         return False, f"Could not load existing terms: {exc}"
 
@@ -383,7 +383,7 @@ def _load_existing_slugs() -> set[str]:
         Set of slug strings.
     """
     try:
-        terms_by_slug, _ = _load_all_terms_impl()
+        terms_by_slug, _ = load_all_terms_impl()
         return set(terms_by_slug.keys())
     except Exception as exc:
         print(f"Error loading existing terms: {exc}")
