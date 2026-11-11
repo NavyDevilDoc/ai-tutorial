@@ -1,19 +1,21 @@
-# CLAUDE.md — AI Literacy Tutor (Streamlit)
+# CLAUDE.md — AI Literacy Tutor
 
 ## Project Purpose
 
-A Streamlit-based AI literacy tool for non-technical professionals in the private sector. It presents a curated dictionary of AI/ML terms with plain-language definitions, real-world examples, and "use in a sentence" guidance. The goal is confident comprehension, not technical mastery.
+A React-based AI literacy tool for non-technical professionals in the private sector. It presents a curated dictionary of AI/ML terms with plain-language definitions, real-world examples, and "use in a sentence" guidance. The goal is confident comprehension, not technical mastery.
+
+A thin Node (Hono) server fronts the SPA with one API route — `POST /api/suggest` — which turns in-app term suggestions into GitHub Issues. A separate GitHub Action picks those issues up, uses Claude to flesh out any fields the suggester left blank, and opens a Pull Request.
 
 ---
 
 ## What This Project Is NOT
 
 Do not over-engineer. This project intentionally excludes:
-- LLM-generated or dynamic definitions (all content is static and human-authored)
+- LLM-generated or dynamic definitions in the live app (all served content is static and human-reviewed before merge)
 - User authentication or accounts
-- A database (all data lives in flat files)
+- A database (all data lives in flat JSON files)
 - An admin UI for editing terms
-- Deployment infrastructure (local/Streamlit Community Cloud only)
+- Any infrastructure beyond Railway (single service, single Node process)
 
 If a new feature seems to require any of the above, flag it for discussion rather than implementing it.
 
@@ -21,60 +23,136 @@ If a new feature seems to require any of the above, flag it for discussion rathe
 
 ## Tech Stack
 
+### Live app (served by Railway)
+
 | Layer | Choice | Notes |
 |---|---|---|
-| UI | `streamlit` | Only UI framework; no Flask, FastAPI, etc. |
-| Fuzzy Search | `rapidfuzz` | Do NOT use `fuzzywuzzy` (deprecated) |
-| Data Format | JSON (`.json`) | Human-editable; one file per category |
-| Styling | Streamlit native + optional `st.markdown` CSS | No external CSS frameworks |
-| Python Version | 3.11+ | Use type hints throughout |
-| Package Manager | `pip` with `requirements.txt` | No Poetry, no conda |
+| Build + dev server | Vite 8 | React plugin, TypeScript, HMR |
+| UI | React 18 + TypeScript | Function components, hooks |
+| Styling | Tailwind 3 | HSL CSS variables for dark/light theme |
+| Primitives | shadcn-style, hand-written | Copied into `web/src/components/ui/`, not a runtime UI library |
+| Validation | Zod 4 | Single `TermSchema` used by loader + prebuild gate; single `SuggestionSchema` shared by RHF client + Hono server |
+| Fuzzy search | Fuse.js 7 | Replaces rapidfuzz; score threshold 0.4 |
+| Routing | React Router 7 | `BrowserRouter`; permalink support (`/term/:slug`) |
+| Session state | Zustand 5 | Only the navigation history stack |
+| Forms | React Hook Form 7 + `@hookform/resolvers` | Paired with shadcn `<Form>` + Zod |
+| Graph viz | React Flow (`@xyflow/react`) 12 | Replaces networkx+Plotly |
+| Server | Hono 4 + `@hono/node-server` | Single `server/index.ts`, serves `dist/` + `/api/*` |
+| Testing | Vitest 5 + Testing Library + jsdom | 82 tests; `server/__tests__/*` + `src/__tests__/*` |
+| Runtime | Node >=22 | Pinned via `engines` in `web/package.json`; Railway's Railpack detects it |
+| Deploy | Railway | Root Directory = `web`; `web/Procfile` → `npm start` → `tsx server/index.ts` |
+
+### Term-authoring pipeline (runs on GitHub)
+
+| Layer | Choice | Notes |
+|---|---|---|
+| Content validator | Pydantic v2 | `core/models.py` — mirrors the Zod `TermSchema` |
+| Data loading / validation | `core/data_loading.py` | Streamlit-free; used by CLI + Action |
+| Input sanitization | `core/sanitize.py` | HTML stripping, control-char filtering, slug/term-name normalization |
+| CLI tool | `tools/add_term.py` | LLM-assisted (default), manual, JSON import, and batch-dir modes |
+| GitHub Action | `.github/workflows/term-from-issue.yml` + `.github/scripts/process_approved_term.py` | Triggers on `term-approved` label; writes directly to `web/src/data/<category>.json` and opens a PR |
+| LLM | Anthropic Claude | `tools/add_term.py:generate_term_with_llm`; few-shot prompted with existing terms |
+| Python runtime | 3.12+ | Managed with `uv` |
+
+The pipeline and the live app share no runtime dependency — both read/write `web/src/data/*.json`, but neither imports the other at runtime.
 
 ---
 
 ## Project Structure
 
 ```
-ai-tutor/
-├── CLAUDE.md                  ← this file
+ai-tutorial/
+├── CLAUDE.md                              ← this file
 ├── README.md
-├── requirements.txt
-├── app.py                     ← Streamlit entry point (thin orchestration layer only)
+├── ADD_A_TERM.md                          ← three ways to add a term
+├── PROGRESS.md                            ← historical development log (Streamlit era + migration)
+├── LICENSE
+├── pyproject.toml                         ← Python deps (pydantic only; anthropic + pytest as dev)
+├── uv.lock
 │
-├── data/
-│   ├── _schema.json           ← canonical schema for a term entry (reference only)
-│   ├── ml_fundamentals.json
-│   ├── neural_networks.json
-│   ├── nlp.json
-│   ├── computer_vision.json
-│   ├── mlops.json
-│   └── statistics.json
+├── web/                                   ← the live app
+│   ├── Procfile                           ← web: npm start
+│   ├── package.json                       ← engines pin; tsx in deps so prod can run it
+│   ├── tsconfig.json
+│   ├── vite.config.ts                     ← /api/* proxy to :3000 in dev; Vitest config
+│   ├── tailwind.config.ts
+│   ├── index.html
+│   ├── scripts/
+│   │   └── validate-data.ts               ← prebuild gate: Zod-validates every JSON file
+│   ├── server/
+│   │   ├── index.ts                       ← Hono app: /api, /healthz, static dist/
+│   │   ├── suggest.ts                     ← POST /api/suggest router factory
+│   │   ├── github.ts                      ← fetch wrapper for GitHub Issues API
+│   │   ├── rateLimit.ts                   ← in-memory per-IP, 3/hour
+│   │   └── __tests__/                     ← github + suggest tests (Hono app.request)
+│   └── src/
+│       ├── main.tsx
+│       ├── App.tsx                        ← BrowserRouter + route table
+│       ├── index.css                      ← Tailwind directives + HSL theme variables
+│       ├── constants.ts                   ← Display strings, difficulty colors, category display names
+│       ├── models.ts                      ← Zod TermSchema + SuggestionSchema (shared with server)
+│       ├── data/
+│       │   ├── *.json                     ← the 137 production terms (SOURCE OF TRUTH)
+│       │   ├── loader.ts                  ← pure loadFromRawCategories + compute helpers
+│       │   └── index.ts                   ← Vite-only wrapper that globs *.json + caches
+│       ├── lib/
+│       │   ├── search.ts                  ← Fuse.js wrapper + letter helpers
+│       │   ├── sanitize.ts                ← sanitizeText / sanitizeTermName / buildIssueBody
+│       │   ├── history.ts                 ← pure push/pop stack helpers
+│       │   ├── useFilters.ts              ← URL-synced filter state
+│       │   ├── useTermNav.ts              ← goToTerm/goBack/goHome (centralizes history push)
+│       │   ├── useTheme.ts                ← light/dark with localStorage + prefers-color-scheme
+│       │   └── utils.ts                   ← cn() = tailwind-merge(clsx)
+│       ├── state/
+│       │   └── store.ts                   ← Zustand: history stack
+│       ├── components/
+│       │   ├── Layout.tsx                 ← header + sidebar + main outlet
+│       │   ├── Sidebar.tsx                ← search + category + difficulty + letter + browse + reset
+│       │   ├── TermCard.tsx               ← full term detail view
+│       │   ├── RelatedPanel.tsx           ← clickable related-term cards
+│       │   ├── TermGraph.tsx              ← React Flow relationship graph (collapsible)
+│       │   ├── NavButtons.tsx             ← Home + Back
+│       │   ├── SuggestionForm.tsx         ← RHF + shared SuggestionSchema
+│       │   ├── ThemeToggle.tsx
+│       │   └── ui/                        ← button, input, select, label, textarea, form
+│       ├── routes/
+│       │   ├── WelcomeRoute.tsx           ← hero + quick-starts + suggestion form + legacy ?term= redirect
+│       │   └── TermRoute.tsx              ← composes NavButtons / TermCard / RelatedPanel / TermGraph
+│       └── __tests__/                     ← Zod models, loader, search, history, sanitize, useFilters, TermCard, suggestionSchema
 │
-├── core/
+├── core/                                  ← Python shared libs for the authoring pipeline
 │   ├── __init__.py
-│   ├── loader.py              ← loads and validates all JSON data at startup
-│   ├── search.py              ← fuzzy matching logic (rapidfuzz)
-│   └── models.py             ← Pydantic models for Term and Category
+│   ├── constants.py                       ← CATEGORY_DISPLAY_NAMES (shared with Action)
+│   ├── models.py                          ← Pydantic Term + validate_related_terms
+│   ├── data_loading.py                    ← Pure load/validate; reads from web/src/data/
+│   └── sanitize.py                        ← sanitize_term_name, sanitize_text
 │
-├── ui/
-│   ├── __init__.py
-│   ├── sidebar.py             ← category dropdown + search input
-│   ├── term_card.py           ← renders a single term's full detail view
-│   └── related_panel.py      ← "related terms" sidebar panel
+├── tools/
+│   └── add_term.py                        ← CLI: interactive LLM / manual / --json-file / --batch-dir
 │
-└── tests/
+├── .github/
+│   ├── workflows/
+│   │   └── term-from-issue.yml            ← label-triggered; writes to web/src/data/ + opens PR
+│   └── scripts/
+│       └── process_approved_term.py       ← extracts issue JSON + overlays user prose on LLM output
+│
+└── tests/                                 ← pytest; 47 tests for core/, tools/, and the Action
+    ├── conftest.py
+    ├── fixtures/
+    ├── test_models.py
     ├── test_loader.py
-    ├── test_search.py
-    └── test_models.py
+    ├── test_sanitize.py
+    ├── test_batch_import.py
+    └── test_process_approved_term.py
 ```
 
-**Rule:** `app.py` must stay thin — it only calls `ui/` functions. All logic belongs in `core/`.
+**Rule:** `web/src/App.tsx` stays thin — only routing + layout. Features live in `components/` and `routes/`. Pure logic lives in `lib/`.
 
 ---
 
 ## Data Schema
 
-Every term entry must conform to this shape (see `data/_schema.json`):
+Every term in `web/src/data/*.json` must satisfy `TermSchema` in `web/src/models.ts` (and the mirror Pydantic `Term` in `core/models.py` for the Action):
 
 ```json
 {
@@ -92,155 +170,176 @@ Every term entry must conform to this shape (see `data/_schema.json`):
 ```
 
 **Field rules:**
-- `slug`: lowercase, hyphen-separated, unique across ALL categories
-- `difficulty`: one of `"beginner"`, `"intermediate"`, `"advanced"`
-- `related_terms`: references slugs (not display names) — enforce this at load time
+- `slug`: lowercase, hyphen-separated, globally unique (enforced by Zod regex + Pydantic validator)
+- `difficulty`: one of `"beginner"`, `"intermediate"`, `"advanced"` (Zod enum / Pydantic Literal)
+- `related_terms`: references slugs (not display names); cross-checked at load time
 - `definition`: plain English, no jargon without a link to another term
-- `analogy`: required — must use a non-technical reference
-- `use_in_a_sentence`: must be a realistic private-sector business scenario
+- `analogy`: required — non-technical reference
+- `use_in_a_sentence`: realistic private-sector business scenario
 
 ---
 
-## Core Logic
+## Shared SuggestionSchema
 
-### `core/loader.py`
+`web/src/models.ts` also exports `SuggestionSchema`, the single source of truth for the suggestion form payload. Used by:
+- `web/src/components/SuggestionForm.tsx` via `zodResolver` (client validation + inline errors)
+- `web/server/suggest.ts` via `safeParse` (server validation before sanitize → GitHub)
 
-- Load all `.json` files from `data/` at startup (skip `_schema.json`)
-- Validate every entry against the Pydantic `Term` model — raise `ValueError` with the offending slug on failure
-- Build two lookup structures:
-  - `terms_by_slug: dict[str, Term]` — O(1) lookup
-  - `terms_by_category: dict[str, list[Term]]` — for dropdown population
-- Cache with `@st.cache_data` so it only runs once per session
+Three required fields (`termName`, `category`, `difficulty`) + five optional prose fields (`definition`, `analogy`, `use_in_a_sentence`, `business_context`, `context`). Empty-string optionals normalize to `undefined` via Zod `.transform`.
 
-### `core/search.py`
+---
 
-- Use `rapidfuzz.process.extractOne` for single best-match search
-- Use `rapidfuzz.process.extract` (top 5) for "did you mean?" suggestions
-- Search against both `term` (display name) and `tags` fields
-- Return `None` if best match score < 60 (configurable constant `MIN_MATCH_SCORE = 60`)
-- Never search across slugs directly — slugs are internal only
+## Core Logic (web/)
 
-### `core/models.py`
+### `src/data/loader.ts`
 
-- Define `Term` and `Category` as Pydantic v2 `BaseModel` classes
-- `Term` validator: confirm all `related_terms` slugs exist in the full term index (inject index at validation time)
+- Pure `loadFromRawCategories(dict)` — validates every term with `TermSchema`, enforces slug uniqueness, cross-checks `related_terms`.
+- Used by both the Vite runtime wrapper (`src/data/index.ts`) and the prebuild gate (`scripts/validate-data.ts`).
+
+### `src/lib/search.ts`
+
+- `searchBestMatch` / `searchSuggestions` via Fuse.js over `"${term.term} ${tags.join(' ')}"`.
+- `SEARCH_THRESHOLD = 0.4` (inverted from rapidfuzz's 60-of-100; return `null` when no match beats it).
+- `getAvailableLetters` / `groupTermsByLetter` for the sidebar letter row.
+
+### `src/lib/useFilters.ts`
+
+- Reads/writes filter state to URL search params (`?category=nlp&difficulty=beginner&letter=A&q=...`).
+- `filterTerms(terms, filters)` is a pure helper tested in isolation.
+
+### `src/lib/useTermNav.ts`
+
+- `goToTerm(slug)` pushes the current term onto the history stack before navigating. `goBack` only pops. `goHome` clears.
+- All forward term-navigation callsites use this hook — Sidebar search/browse, RelatedPanel links, TermGraph node clicks. Do NOT add a reactive history push in a `useEffect`; it causes oscillation on Back.
+
+### `server/suggest.ts`
+
+- Rate-limited (`createRateLimiter`, default 3/hour per IP).
+- Validates with `SuggestionSchema.safeParse`, sanitizes each field, builds the issue body, posts via `server/github.ts`.
 
 ---
 
 ## UI Behavior
 
-### Sidebar (`ui/sidebar.py`)
-1. Category dropdown — "All Categories" as default option
-2. Text input for term search (label: "Search for a term…")
-3. As user types, show top 3 fuzzy suggestions below the input using `st.caption`
-4. A "Clear" button that resets both inputs
+### Sidebar (`components/Sidebar.tsx`)
+1. Text search with top-5 live suggestions (`searchSuggestions`); Enter picks the top match.
+2. Category `<Select>` with per-category counts.
+3. Difficulty row of button chips with counts that cascade from category.
+4. Letter row of button chips (only letters that exist in the current filter set).
+5. Browse `<Select>` listing the filtered terms.
+6. "Reset Filters" clears all URL params.
 
-### Term Card (`ui/term_card.py`)
-Render in this order:
-1. Term name (`st.title`) + difficulty badge (color-coded `st.badge` or colored `st.markdown`)
-2. Category chip
-3. Definition (`st.write`)
-4. Analogy block — use `st.info` with a 💡 prefix
-5. "Use in a sentence" — use `st.success` with a 💼 prefix
-6. Business context — use `st.write` with subtle styling
-7. Tags as `st.chips` or pill-style `st.markdown` badges
+### Term Card (`components/TermCard.tsx`)
+In order: title, color-coded difficulty badge, category caption, definition, info callout (💡 Analogy), success callout (💼 Use in a Sentence), business context, tag chips.
 
-### Related Terms Panel (`ui/related_panel.py`)
-- Rendered in `st.sidebar` below the search inputs
-- Shows up to 4 related term cards (term name + one-line definition only)
-- Each is clickable and sets the selected term in `st.session_state`
+### Related Terms (`components/RelatedPanel.tsx`)
+Up to 6 related terms as clickable cards with one-line definitions. Click goes through `goToTerm` so history accumulates.
+
+### Term Graph (`components/TermGraph.tsx`)
+Collapsible React Flow radial layout. Center term + related terms color-coded by difficulty. Click a neighbor to navigate.
+
+### Suggestion Form (`components/SuggestionForm.tsx`)
+RHF + shared `SuggestionSchema`. Required: term + category + difficulty. Optional: definition / analogy / sentence / business context / note-to-maintainer. Submit → `POST /api/suggest` → GitHub Issue. User-provided prose fields win over the LLM during Action-time generation.
 
 ---
 
-## Session State Keys
+## URL / Session State
 
-Use these exact keys — do not invent new ones without updating this list:
+| Where | What |
+|---|---|
+| URL path (`/term/:slug`) | Which term is being viewed |
+| URL search params (`?category=&difficulty=&letter=&q=`) | Filters |
+| Zustand (`state/store.ts`) | Navigation history stack |
+| `localStorage` (`useTheme`) | Light/dark preference |
 
-| Key | Type | Purpose |
-|---|---|---|
-| `selected_term` | `str \| None` | Slug of currently displayed term |
-| `selected_category` | `str \| None` | Currently active category filter |
-| `search_query` | `str` | Current text in the search box |
+No other session state. If you're about to add more, think twice — most things belong in the URL for shareability.
 
 ---
 
 ## Coding Conventions
 
-- **Type hints everywhere** — no untyped function signatures
-- **Docstrings** on all public functions — one-line summary + Args/Returns
-- **No global mutable state** outside of `st.session_state`
-- **No hardcoded strings** in UI — all display text goes through a `constants.py` file (create if needed)
-- **Error handling:** if a term lookup fails, show `st.warning("Term not found. Try a different search.")` — never a raw exception
-- Maximum function length: **40 lines** — split if longer
-- Use `pathlib.Path` for all file paths, never `os.path`
+- **TypeScript strict mode** — no implicit any; `noUnusedLocals`/`noUnusedParameters` on.
+- **Type hints everywhere in Python** — no untyped signatures.
+- **Docstrings on public functions** — one-line summary + Args/Returns.
+- **No global mutable state** outside Zustand / `localStorage`.
+- **No hardcoded display strings in components** — add to `src/constants.ts`.
+- **Error handling:** 4xx on bad input, 429 on rate limit, 502 on upstream (GitHub) failure. Never leak tokens in error strings.
+- **Function length cap: 40 lines** — split if longer.
+- **File paths:** `pathlib.Path` in Python, `node:path` in TS. Never string concatenation.
 
 ---
 
-## Initial Categories & Seed Terms
+## Categories
 
-Populate at least 5 terms per category before considering the MVP complete.
+Nine category files live under `web/src/data/`:
 
-| Category File | Display Name | Example Terms |
-|---|---|---|
-| `ml_fundamentals.json` | ML Fundamentals | Supervised Learning, Model, Feature, Label, Training Data, Inference |
-| `neural_networks.json` | Neural Networks | Neuron, Layer, Weight, Bias, Activation Function, Backpropagation |
-| `nlp.json` | Natural Language Processing | Tokenization, Embedding, Transformer, Prompt, Fine-tuning |
-| `computer_vision.json` | Computer Vision | Image Classification, Object Detection, Convolutional Layer, Pixel |
-| `mlops.json` | MLOps & Deployment | Model Drift, Pipeline, Endpoint, Monitoring, A/B Testing |
-| `statistics.json` | Statistics & Math | Mean, Variance, Distribution, Correlation, Overfitting, Underfitting |
+| File key | Display name |
+|---|---|
+| `ml_fundamentals` | ML Fundamentals |
+| `neural_networks` | Neural Networks |
+| `nlp` | Natural Language Processing |
+| `computer_vision` | Computer Vision |
+| `mlops` | MLOps & Deployment |
+| `statistics` | Statistics & Math |
+| `generative_ai` | Generative AI |
+| `ai_ethics` | AI Ethics & Governance |
+| `business_strategy` | Business & Strategy |
 
----
-
-## Requirements File
-
-```
-streamlit
-rapidfuzz
-pydantic
-pytest
-```
+Display names are in `src/constants.ts` (TS) and `core/constants.py` (Python).
 
 ---
 
 ## Running Locally
 
 ```bash
-pip install -r requirements.txt
-streamlit run app.py
+cd web
+npm install
+npm run dev     # concurrently: Vite on :5174, Hono on :3000, /api/* proxied
+```
+
+Prod shape (what Railway runs):
+
+```bash
+cd web
+npm run build   # validate:data → tsc -b → vite build → dist/
+npm start       # tsx server/index.ts → serves dist/ + /api/*
+```
+
+For the authoring pipeline:
+
+```bash
+uv sync                           # install pydantic + dev deps
+uv run pytest tests/ -v           # 47 tests
+uv run python tools/add_term.py   # add a term
 ```
 
 ---
 
 ## Testing
 
-- Tests live in `tests/` and use `pytest`
-- Run with: `pytest tests/ -v`
-- Required test coverage:
-  - `test_loader.py`: valid JSON loads without error; invalid schema raises `ValueError`
-  - `test_search.py`: exact match returns score 100; gibberish returns `None`; partial match returns correct term
-  - `test_models.py`: missing required fields raise Pydantic `ValidationError`
-- Do not use mocks for the data loader — use a small `fixtures/` JSON file instead
+- Web: `npm --prefix web test` → Vitest (82 tests across 10 files, jsdom env)
+- Python: `uv run pytest tests/ -v` → pytest (47 tests)
+- Data: `npm --prefix web run validate:data` runs as part of `npm run build` — bad JSON fails CI before any build artifact is produced
+
+Do not add mocks for the data loader; use fixture JSON or the `data_dir` parameter on `load_all_terms_impl`.
 
 ---
 
-## MVP Definition of Done
+## Deployment
 
-The MVP is complete when:
-- [ ] All 6 category JSON files have ≥ 5 valid terms each
-- [ ] Category dropdown filters the search scope correctly
-- [ ] Fuzzy search returns the correct term for partial/misspelled input
-- [ ] Term card renders all 7 fields without layout breakage
-- [ ] Related terms panel updates when a new term is selected
-- [ ] All `pytest` tests pass
-- [ ] App runs with `streamlit run app.py` from a clean `pip install`
+Railway service points at **Root Directory `web`**. Build is auto-detected by Railpack from `web/package.json` (`engines.node >=22`). Start is read from `web/Procfile` (`npm start`).
+
+Environment variables on the Railway service:
+- `GITHUB_TOKEN` — fine-grained PAT with Issues R/W on `NavyDevilDoc/ai-tutorial`
+- Optional overrides: `GITHUB_REPO_OWNER` (default `NavyDevilDoc`), `GITHUB_REPO_NAME` (default `ai-tutorial`), `PORT` (default `3000`; Railway injects its own)
 
 ---
 
 ## Out of Scope (Do Not Implement)
 
-- Quiz/flashcard mode (future phase)
+- Quiz/flashcard mode
 - User progress tracking
-- PDF export of definitions
-- Admin interface for adding terms
-- Any LLM API calls
+- PDF export
+- Admin interface for editing terms
+- Any LLM API calls from the live web app (LLM only runs inside the GitHub Action)
 - Login or access control

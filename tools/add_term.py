@@ -24,7 +24,7 @@ from core.constants import CATEGORY_DISPLAY_NAMES
 from core.data_loading import load_all_terms_impl
 from core.models import Term
 
-DATA_DIR = PROJECT_ROOT / "data"
+DATA_DIR = PROJECT_ROOT / "web" / "src" / "data"
 VALID_CATEGORIES = list(CATEGORY_DISPLAY_NAMES.keys())
 VALID_DIFFICULTIES = ["beginner", "intermediate", "advanced"]
 

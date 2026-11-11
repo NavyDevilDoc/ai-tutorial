@@ -10,16 +10,17 @@ Best for: end users, subject matter experts, anyone with a browser.
 
 1. Go to the live app and scroll to **"Suggest a New Term"** at the bottom of the welcome page
 2. Fill in the form:
-   - **Term Name** (required) — the term as you'd hear it in a meeting
-   - **Suggested Category** — pick the closest match from the dropdown
-   - **Difficulty** — beginner (what it is), intermediate (how it works), advanced (deep technical)
-   - **Additional Context** (optional) — why this term matters, any definition you'd suggest
+   - **Term** (required) — the term as you'd hear it in a meeting
+   - **Category** (required) — pick the closest match from the dropdown
+   - **Difficulty** (required) — beginner (what it is), intermediate (how it works), advanced (deep technical)
+   - **Definition / Analogy / Use in a Sentence / Business Context** (all optional) — fill in what you know; leave blank what you don't
+   - **Note to maintainer** (optional) — where you heard the term, anything we should know
 3. Click **Submit Suggestion**
 4. A GitHub Issue is automatically created with the `term-suggestion` label
 
-**What happens next:** A maintainer reviews the issue. If approved, they add the `term-approved` label, which triggers an automated pipeline that generates the full glossary entry, validates it, and opens a Pull Request. The maintainer reviews the PR and merges it. Railway auto-deploys.
+**What happens next:** A maintainer reviews the issue. If approved, they add the `term-approved` label, which triggers an automated pipeline. The pipeline calls Claude to generate a full glossary entry; **any prose fields you provided override the LLM's output** (user words always win, Claude backfills the blanks). The result is validated, opened as a Pull Request, reviewed, and merged. Railway auto-deploys.
 
-**Rate limit:** One suggestion per browser session.
+**Rate limit:** Three suggestions per hour per IP.
 
 ---
 
@@ -34,8 +35,9 @@ Best for: project maintainers reviewing user suggestions.
    - Search for `term-approved` and check it
    - Click outside the dropdown to apply
 4. A GitHub Action automatically:
-   - Extracts the term data from the issue
+   - Extracts the term data from the issue (including any prose fields the user provided)
    - Calls Claude to generate the full 10-field glossary entry using few-shot prompting
+   - Overlays user-provided `definition` / `analogy` / `use_in_a_sentence` / `business_context` on top of the LLM output (user wins)
    - Validates the entry with Pydantic (schema, slug format, uniqueness)
    - Strips any dangling `related_terms` references
    - Creates a branch and opens a Pull Request
@@ -91,7 +93,7 @@ uv run python tools/add_term.py --term "Compute" --category ml_fundamentals --di
 uv run python tools/add_term.py --json-file path/to/term.json
 ```
 
-The JSON file must contain a complete term object matching the schema in `data/_schema.json`.
+The JSON file must contain a complete term object matching the Zod schema in `web/src/models.ts` (`TermSchema`).
 
 ### After adding terms locally
 
@@ -101,7 +103,7 @@ uv run pytest tests/ -v
 
 # Commit and push (via PR if branch protection is on)
 git checkout -b add/new-terms
-git add data/
+git add web/src/data/
 git commit -m "Add new terms"
 git push -u origin add/new-terms
 gh pr create --title "Add new terms" --body "Description of terms added"
@@ -117,7 +119,7 @@ Every term must have these 10 fields:
 |---|---|---|
 | `term` | string | Display name as used in conversation |
 | `slug` | string | Lowercase, hyphen-separated, globally unique |
-| `category` | string | Must match a filename in `data/` (e.g., `ml_fundamentals`) |
+| `category` | string | Must match a filename stem in `web/src/data/` (e.g., `ml_fundamentals`) |
 | `difficulty` | string | One of: `beginner`, `intermediate`, `advanced` |
 | `definition` | string | Plain English, 1-3 sentences, no unexplained jargon |
 | `analogy` | string | Non-technical metaphor that makes the concept click |

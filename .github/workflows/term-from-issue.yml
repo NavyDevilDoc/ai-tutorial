@@ -43,7 +43,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -b "$BRANCH_NAME"
-          git add data/
+          git add web/src/data/
           git diff --cached --quiet && echo "No changes to commit" && exit 0
           git commit -m "Add term from issue #${ISSUE_NUMBER}"
           git push origin "$BRANCH_NAME"

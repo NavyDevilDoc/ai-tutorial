@@ -11,7 +11,7 @@ from pathlib import Path
 from core.constants import CATEGORY_DISPLAY_NAMES
 from core.models import Term, validate_related_terms
 
-DATA_DIR: Path = Path(__file__).resolve().parent.parent / "data"
+DATA_DIR: Path = Path(__file__).resolve().parent.parent / "web" / "src" / "data"
 
 
 def load_all_terms_impl(
