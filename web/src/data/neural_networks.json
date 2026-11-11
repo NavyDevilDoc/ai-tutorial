@@ -342,5 +342,27 @@
       "nlp",
       "transformers"
     ]
+  },
+  {
+    "term": "Small Language Model",
+    "slug": "small-language-model",
+    "category": "neural_networks",
+    "difficulty": "intermediate",
+    "definition": "A type of AI model trained to understand and generate text, but built with far fewer parameters than large-scale systems like GPT-4. This smaller size makes it faster, cheaper to run, and practical to deploy on a single company's own servers or even on a device like a laptop.",
+    "analogy": "Like a specialist consultant versus a generalist firm. The generalist firm knows something about everything, but hiring them is expensive and slow. The specialist knows one domain deeply, costs far less, and can be on-site full time.",
+    "use_in_a_sentence": "The legal team deployed a small language model on their private servers to review and summarize contracts, keeping sensitive client data entirely in-house rather than sending it to a third-party cloud service.",
+    "business_context": "Small language models let organizations run AI-powered text tools without large cloud computing bills or the data-privacy risks of sending confidential information to external providers. For companies in regulated industries, this tradeoff between capability and control is often the deciding factor in which model they choose.",
+    "related_terms": [
+      "large-language-model",
+      "fine-tuning",
+      "parameter",
+      "inference"
+    ],
+    "tags": [
+      "slm",
+      "language-models",
+      "efficiency",
+      "deployment"
+    ]
   }
 ]
