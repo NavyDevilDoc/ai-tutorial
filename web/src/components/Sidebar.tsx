@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import {
   ALL_CATEGORIES_LABEL,
   ALL_DIFFICULTIES_LABEL,
@@ -8,6 +7,7 @@ import {
 } from "../constants";
 import { loadAllTerms } from "../data";
 import { filterTerms, useFilters } from "../lib/useFilters";
+import { useTermNav } from "../lib/useTermNav";
 import { cn } from "../lib/utils";
 import { getAvailableLetters, searchSuggestions } from "../lib/search";
 import type { Difficulty, Term } from "../models";
@@ -32,7 +32,7 @@ const DIFFICULTY_LABELS: Record<Difficulty, string> = {
 };
 
 export function Sidebar() {
-  const navigate = useNavigate();
+  const { goToTerm } = useTermNav();
   const loaded = loadAllTerms();
   const { filters, setCategory, setDifficulty, setLetter, setQuery, reset } =
     useFilters();
@@ -85,7 +85,7 @@ export function Sidebar() {
   function goTo(slug: string) {
     setQuery("");
     setLocalQuery("");
-    navigate(`/term/${slug}`);
+    goToTerm(slug);
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {

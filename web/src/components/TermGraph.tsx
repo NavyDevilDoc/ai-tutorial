@@ -6,8 +6,8 @@ import {
   type Node,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import { useNavigate } from "react-router-dom";
 import { DIFFICULTY_COLORS } from "../constants";
+import { useTermNav } from "../lib/useTermNav";
 import type { Term } from "../models";
 import { Button } from "./ui/button";
 
@@ -21,7 +21,7 @@ export function TermGraph({
   term: Term;
   bySlug: ReadonlyMap<string, Term>;
 }) {
-  const navigate = useNavigate();
+  const { goToTerm } = useTermNav();
   const [open, setOpen] = useState(false);
 
   const related = useMemo(
@@ -89,7 +89,7 @@ export function TermGraph({
             elementsSelectable
             proOptions={{ hideAttribution: true }}
             onNodeClick={(_, node) => {
-              if (node.id !== term.slug) navigate(`/term/${node.id}`);
+              if (node.id !== term.slug) goToTerm(node.id);
             }}
           >
             <Background />

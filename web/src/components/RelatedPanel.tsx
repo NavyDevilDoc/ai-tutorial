@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTermNav } from "../lib/useTermNav";
 import type { Term } from "../models";
 
 const MAX_RELATED = 6;
@@ -10,6 +11,7 @@ export function RelatedPanel({
   term: Term;
   bySlug: ReadonlyMap<string, Term>;
 }) {
+  const { goToTerm } = useTermNav();
   const related = term.related_terms
     .map((slug) => bySlug.get(slug))
     .filter((t): t is Term => Boolean(t))
@@ -27,6 +29,12 @@ export function RelatedPanel({
           <li key={r.slug}>
             <Link
               to={`/term/${r.slug}`}
+              onClick={(e) => {
+                // Let modifier-clicks (open-in-new-tab, etc.) fall through
+                if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+                e.preventDefault();
+                goToTerm(r.slug);
+              }}
               className="block rounded-md border p-3 transition-colors hover:border-primary hover:bg-accent"
             >
               <p className="text-sm font-medium">{r.term}</p>
