@@ -273,5 +273,28 @@
       "reliability",
       "production"
     ]
+  },
+  {
+    "term": "Model Context Protocol",
+    "slug": "model-context-protocol",
+    "category": "mlops",
+    "difficulty": "intermediate",
+    "definition": "A standardized set of rules that governs how an AI model receives, interprets, and uses background information — such as previous conversation history, user preferences, or business data — when generating a response. Rather than each application inventing its own way to feed context to a model, MCP provides a common language so that any tool or data source can connect to any compatible AI model consistently.",
+    "analogy": "Like a universal electrical outlet standard. Before it existed, every device needed a different plug and adapter. Once the standard was adopted, any appliance could plug into any socket anywhere — no custom wiring required.",
+    "use_in_a_sentence": "By adopting the Model Context Protocol, our customer service platform can now pass a caller's full order history and account status directly to the AI agent, so it responds with relevant answers instead of asking customers to repeat themselves.",
+    "business_context": "MCP reduces the cost and complexity of integrating AI models with existing business systems, allowing teams to swap or upgrade models without rebuilding every data connection from scratch. For organizations deploying AI across multiple products, it is a key factor in scaling efficiently.",
+    "related_terms": [
+      "api",
+      "endpoint",
+      "inference",
+      "pipeline",
+      "prompt-engineering"
+    ],
+    "tags": [
+      "mcp",
+      "integration",
+      "interoperability",
+      "deployment"
+    ]
   }
 ]
