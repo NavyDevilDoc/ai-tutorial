@@ -30,3 +30,8 @@ Thumbs.db
 
 # pytest
 .pytest_cache/
+
+# Stray Node artifacts at repo root (web/ has its own node_modules + lockfile)
+/node_modules/
+/package.json
+/package-lock.json
